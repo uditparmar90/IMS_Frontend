@@ -1,11 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Sidebar } from "./sidebar/sidebar";
-import { AddProductComponent } from "./add-product/add-product";
 
 @Component({
   selector: 'app-root',
-  imports: [Sidebar, AddProductComponent],
+  imports: [Sidebar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -1,0 +1,46 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f172a, #020617);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.brand i {
+  font-size: 40px;
+  color: #3b82f6;
+}
+
+.brand h4 {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.form-control {
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+.btn-primary {
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.forgot-link {
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}

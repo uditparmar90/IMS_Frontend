@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from "@angular/router";
+import { RouterOutlet, RouterLinkWithHref } from "@angular/router";
 import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterOutlet, NgIf,NgClass],
+  imports: [RouterOutlet, NgIf, NgClass, RouterLinkWithHref],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })

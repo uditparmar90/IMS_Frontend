@@ -16,6 +16,7 @@
       </button>
     </div>
 
+    <router-outlet>
     <!-- Menu -->
     <ul class="menu">
       <li>
@@ -28,7 +29,8 @@
       <li>
         <a routerLink="/products" routerLinkActive="active">
           <i class="bi bi-box"></i>
-          <span *ngIf="!isCollapsed">Products</span>
+          <!-- <span *ngIf="!isCollapsed">Products</span> -->
+           <a routerLink="/Product">Add products</a>
         </a>
       </li>
 
@@ -53,6 +55,7 @@
         </a>
       </li>
     </ul>
+    </router-outlet>
   </aside>
 
   <!-- Main Content -->
