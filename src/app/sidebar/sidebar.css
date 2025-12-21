@@ -1,0 +1,103 @@
+/* Layout */
+.app-layout {
+  min-height: 100vh;
+  background: #f4f6f9;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #0f172a, #020617);
+  color: #e5e7eb;
+  transition: width 0.3s ease;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.25);
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+/* Header */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.brand i {
+  font-size: 22px;
+  color: #38bdf8;
+}
+
+.toggle-btn {
+  background: transparent;
+  border: none;
+  color: #cbd5f5;
+  font-size: 18px;
+}
+
+/* Menu */
+.menu {
+  list-style: none;
+  padding: 12px;
+  margin: 0;
+}
+
+.menu li {
+  margin-bottom: 6px;
+}
+
+.menu a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: #e5e7eb;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.menu a i {
+  font-size: 18px;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* Hover */
+.menu a:hover {
+  background: rgba(56, 189, 248, 0.15);
+  color: #ffffff;
+}
+
+/* Active */
+.menu a.active {
+  background: rgba(56, 189, 248, 0.25);
+  color: #ffffff;
+  box-shadow: inset 4px 0 0 #38bdf8;
+}
+
+/* Collapsed adjustments */
+.sidebar.collapsed .menu a {
+  justify-content: center;
+}
+
+.sidebar.collapsed .brand span {
+  display: none;
+}
+
+/* Content */
+.content {
+  flex-grow: 1;
+  padding: 24px;
+}

@@ -1,0 +1,94 @@
+<div class="add-product-page">
+
+  <!-- Header -->
+  <div class="page-header mb-4">
+    <h3>Add New Product</h3>
+    <p class="text-muted">Create and manage inventory items</p>
+  </div>
+
+  <form [formGroup]="productForm" class="row g-4">
+
+    <!-- Basic Info -->
+    <div class="col-lg-8">
+      <div class="card custom-card">
+        <div class="card-header">
+          <i class="bi bi-box"></i>
+          <span>Product Information</span>
+        </div>
+
+        <div class="card-body row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Product Name</label>
+            <input type="text" class="form-control" formControlName="name">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">SKU</label>
+            <input type="text" class="form-control" formControlName="sku">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Category</label>
+            <select class="form-select" formControlName="category">
+              <option value="">Select Category</option>
+              <option>Electronics</option>
+              <option>Furniture</option>
+              <option>Grocery</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Status</label>
+            <select class="form-select" formControlName="status">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label class="form-label">Description</label>
+            <textarea rows="3" class="form-control" formControlName="description"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing & Stock -->
+    <div class="col-lg-4">
+      <div class="card custom-card">
+        <div class="card-header">
+          <i class="bi bi-currency-rupee"></i>
+          <span>Pricing & Stock</span>
+        </div>
+
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input type="number" class="form-control" formControlName="price">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Opening Stock</label>
+            <input type="number" class="form-control" formControlName="quantity">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Reorder Level</label>
+            <input type="number" class="form-control" formControlName="reorderLevel">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="col-12">
+      <div class="action-bar">
+        <button class="btn btn-secondary" type="button">Cancel</button>
+        <button class="btn btn-primary" type="submit" [disabled]="productForm.invalid">
+          <i class="bi bi-check-circle me-1"></i> Save Product
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>

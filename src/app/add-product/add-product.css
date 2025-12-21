@@ -1,0 +1,44 @@
+.add-product-page {
+  max-width: 1200px;
+}
+
+.page-header h3 {
+  font-weight: 600;
+}
+
+.custom-card {
+  border-radius: 14px;
+  border: none;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  background: transparent;
+  border-bottom: 1px solid #eef2f7;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.card-header i {
+  color: #3b82f6;
+  font-size: 18px;
+}
+
+.form-control,
+.form-select {
+  border-radius: 10px;
+}
+
+.action-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+.btn-primary {
+  padding: 10px 22px;
+  border-radius: 10px;
+}

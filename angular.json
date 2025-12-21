@@ -22,8 +22,13 @@
               }
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/styles.css"
+            ],"scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ],
+            
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
@@ -55,6 +60,9 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
