@@ -6,12 +6,12 @@ import {
   ReactiveFormsModule,
   AbstractControl
 } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet,RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterOutlet],
+  imports: [CommonModule, ReactiveFormsModule, RouterOutlet, RouterLink],
   templateUrl: './sign-up.html',
   styleUrls: ['../login/login.css'],
 })
