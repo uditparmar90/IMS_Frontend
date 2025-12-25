@@ -16,21 +16,20 @@
       </button>
     </div>
 
-    <router-outlet>
+    <!-- <router-outlet> -->
     <!-- Menu -->
     <ul class="menu">
       <li>
-        <a routerLink="/dashboard" routerLinkActive="active">
+        <a routerLink="/" routerLinkActive="active">
           <i class="bi bi-speedometer2"></i>
           <span *ngIf="!isCollapsed">Dashboard</span>
         </a>
       </li>
 
       <li>
-        <a routerLink="/products" routerLinkActive="active">
-          <i class="bi bi-box"></i>
-          <!-- <span *ngIf="!isCollapsed">Products</span> -->
-           <a routerLink="/Product">Add products</a>
+        <a routerLink="/Product" routerLinkActive="active">
+          <i class="bi bi-file-earmark-plus"></i>
+          <span *ngIf="!isCollapsed">Products</span>
         </a>
       </li>
 
@@ -55,7 +54,7 @@
         </a>
       </li>
     </ul>
-    </router-outlet>
+    <!-- </router-outlet> -->
   </aside>
 
   <!-- Main Content -->

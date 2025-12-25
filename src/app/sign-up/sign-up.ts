@@ -11,7 +11,7 @@ import { RouterOutlet,RouterLink } from '@angular/router';
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterOutlet, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './sign-up.html',
   styleUrls: ['../login/login.css'],
 })
