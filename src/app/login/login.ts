@@ -18,7 +18,7 @@ export class LoginComponent {
   private router = inject(Router);
 
   // 2. API URL
-  private apiUrl = 'https://localhost:44398/api/Users/login';
+  private apiUrl = 'https://localhost:44398/api/Authorize/login';
   // 3. Login Function
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -34,9 +34,9 @@ export class LoginComponent {
         next: (response) => {
           console.log('Login successful', response);  
           if (response && (response as any)) {
-            localStorage.setItem('authToken', (response as any).token);
+            localStorage.setItem('Token', (response as any).token);
             this.router.navigate(['/Product']);
-          }
+          } 
         },
         error: (error) => {
           console.error('Login failed', error);
