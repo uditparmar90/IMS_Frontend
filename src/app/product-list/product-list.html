@@ -1,0 +1,27 @@
+<p>product-list works!</p>
+<div class="card">
+    <h3>Inventory List</h3>
+
+    <p-table [value]="(products | async) || []" [tableStyle]="{ 'min-width': '50rem' }">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Quantity</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-product>
+            <tr>
+
+                <td>{{ product.code }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.reorder_lavel }}</td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+</div>

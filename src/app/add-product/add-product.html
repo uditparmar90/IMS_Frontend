@@ -6,7 +6,7 @@
     <p class="text-muted">Create and manage inventory items</p>
   </div>
 
-  <form [formGroup]="productForm" class="row g-4">
+  <form [formGroup]="productForm" class="row g-4" (ngSubmit)="submitProduct()">
 
     <!-- Basic Info -->
     <div class="col-lg-8">
@@ -18,7 +18,7 @@
 
         <div class="card-body row g-3">
           <div class="col-md-6">
-            <label class="form-label">Product Name</label>
+            <label class="form-label">Product Name<span class="text-danger">*</span></label>
             <input type="text" class="form-control" formControlName="name">
           </div>
 
@@ -28,7 +28,7 @@
           </div>
 
           <div class="col-md-6">
-            <label class="form-label">Category</label>
+            <label class="form-label">Category<span class="text-danger">*</span></label>
             <select class="form-select" formControlName="category">
               <option value="">Select Category</option>
               <option>Electronics</option>
@@ -63,17 +63,17 @@
 
         <div class="card-body">
           <div class="mb-3">
-            <label class="form-label">Price</label>
+            <label class="form-label">Price<span class="text-danger">*</span></label>
             <input type="number" class="form-control" formControlName="price">
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Opening Stock</label>
+            <label class="form-label">Opening Stock<span class="text-danger">*</span></label>
             <input type="number" class="form-control" formControlName="quantity">
           </div>
 
           <div class="mb-3">
-            <label class="form-label">Reorder Level</label>
+            <label class="form-label">Reorder Level<span class="text-danger">*</span></label>
             <input type="number" class="form-control" formControlName="reorderLevel">
           </div>
         </div>
