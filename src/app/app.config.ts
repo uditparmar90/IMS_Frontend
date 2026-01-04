@@ -12,14 +12,16 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
         theme: {
-            preset: Aura
-        }
-    }),
+            preset: Aura,
+            options: {
+            darkModeSelector: 'none'
+          }
+        }}),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes), 
     provideClientHydration(withEventReplay()),
-    // provideHttpClient(withFetch()),
+    provideHttpClient(withFetch()),
     provideHttpClient(withInterceptors([authInterceptor]))
   ]
 };

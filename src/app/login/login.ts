@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterLinkWithHref, Router } from '@angular/router';
+import { RouterLinkWithHref, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

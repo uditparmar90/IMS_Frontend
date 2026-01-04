@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
@@ -10,14 +10,18 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './add-product.html',
   styleUrls: ['./add-product.css'],
 })
-export class AddProductComponent {
-  private HttpClient=inject(HttpClient);
-  private FB=inject(FormBuilder);
+export class AddProductComponent implements OnInit {
 
+  private http = inject(HttpClient);
+  private fb = inject(FormBuilder);
 
-  productForm;
+  productForm!: FormGroup;
+  isEditMode = false;
+  productId: number | null = null;
 
-  constructor(private fb: FormBuilder) {
+  ngOnInit() {
+    const product = history.state.product;
+
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       sku: [''],
@@ -28,24 +32,39 @@ export class AddProductComponent {
       quantity: [0, Validators.required],
       reorderLevel: [0, Validators.required],
     });
+
+    if (product) {
+      this.isEditMode = true;
+      this.productId = product.id; // assumes backend sends id
+      this.productForm.patchValue(product);
+      console.log('Editing product:', product);
+    }
   }
 
   submitProduct() {
-    if(this.productForm.valid){
-      const productData = this.productForm.value;
-      this.HttpClient.post('https://localhost:44398/api/Product/Insert', productData).subscribe({
-        next: (response) => {
-          console.log('Product added successfully', response);
+    if (!this.productForm.valid) return;
+
+    const payload = this.productForm.value;
+
+    if (this.isEditMode && this.productId) {
+      this.http.put(
+        `https://localhost:44398/api/Product/Update/${this.productId}`,
+        payload
+      ).subscribe({
+        next: res => console.log('Product updated', res),
+        error: err => console.error(err)
+      });
+    } else {
+      this.http.post(
+        'https://localhost:44398/api/Product/Insert',
+        payload
+      ).subscribe({
+        next: res => {
+          console.log('Product added', res);
           this.productForm.reset();
         },
-        error: (error) => {
-          console.error('Error adding product', error);
-        },
+        error: err => console.error(err)
       });
-
-
-
-
-  }
+    }
   }
 }

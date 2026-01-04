@@ -24,24 +24,25 @@
 
           <div class="col-md-6">
             <label class="form-label">SKU</label>
-            <input type="text" class="form-control" formControlName="sku">
+            <input type="text" class="form-control" formControlName="sku" id="sku">
           </div>
 
           <div class="col-md-6">
             <label class="form-label">Category<span class="text-danger">*</span></label>
-            <select class="form-select" formControlName="category">
-              <option value="">Select Category</option>
-              <option>Electronics</option>
-              <option>Furniture</option>
-              <option>Grocery</option>
+            <select class="form-select" formControlName="category" id="categorySelect">
+              <option value="0">Select Category</option>
+              <option value="1">Electronics</option>
+              <option value="2">Furniture</option>
+              <option value="3">Grocery</option>
             </select>
           </div>
 
           <div class="col-md-6">
             <label class="form-label">Status</label>
             <select class="form-select" formControlName="status">
-              <option value="Active">Active</option>
-              <option value="Inactive">Inactive</option>
+              <option value="0">Select status</option>
+              <option value="1">Active</option>
+              <option value="0">Inactive</option>
             </select>
           </div>
 

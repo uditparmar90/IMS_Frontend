@@ -1,25 +1,32 @@
-<p>product-list works!</p>
+<button class="btn btn-primary m-3" (click)="addProduct()"><i class="bi bi-plus-square px-1"></i>Add Product</button>
 <div class="card">
+    
     <h3>Inventory List</h3>
 
     <p-table [value]="(products | async) || []" [tableStyle]="{ 'min-width': '50rem' }">
 
         <ng-template pTemplate="header">
             <tr>
-                <th>Code</th>
                 <th>Name</th>
-                <th>Category</th>
-                <th>Quantity</th>
+                <th>SKU</th>
+                <th>Price</th>
+                <th>Reorder Level</th>
+                <th>Actions</th>
             </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-product>
             <tr>
 
-                <td>{{ product.code }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.reorder_lavel }}</td>
+                <td class="m-1 p-1">{{ product.name }}</td>
+                <td class="m-1 p-1">{{ product.sku }}</td>  
+                <td class="m-1 p-1">{{ product.price }}</td>
+                <td class="m-1 p-1">{{ product.reorder_level }}</td>
+                <td class="m-1 p-1">
+                    <button class="btn btn-outline-primary btn-sm p-1 m-1" (click)="editProduct(product)">Edit</button>
+                    <button class="btn btn-outline-danger btn-sm p-1 m-1" (click)="deleteProduct(product)">Delete</button>
+                </td>
+
             </tr>
         </ng-template>
 
