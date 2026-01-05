@@ -1,34 +1,77 @@
-<button class="btn btn-primary m-3" (click)="addProduct()"><i class="bi bi-plus-square px-1"></i>Add Product</button>
-<div class="card">
+<div class="container-fluid mt-4">
+  <div class="card shadow-sm border-0">
     
-    <h3>Inventory List</h3>
+    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+      <h4 class="m-0 text-primary fw-bold">
+        <i class="bi bi-box-seam me-2"></i>Inventory List
+      </h4>
+      <button class="btn btn-primary rounded-pill px-4 shadow-sm" (click)="addProduct()">
+        <i class="bi bi-plus-circle me-2"></i>Add Product
+      </button>
+    </div>
 
-    <p-table [value]="(products | async) || []" [tableStyle]="{ 'min-width': '50rem' }">
+    <div class="card-body p-0">
+        <p-table 
+        [value]="(products | async) || []" 
+        [paginator]="true" 
+        [rows]="5" 
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        styleClass="p-datatable-striped p-datatable-sm"
+        responsiveLayout="scroll">
 
         <ng-template pTemplate="header">
             <tr>
-                <th>Name</th>
-                <th>SKU</th>
-                <th>Price</th>
-                <th>Reorder Level</th>
-                <th>Actions</th>
+                <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="sku">SKU <p-sortIcon field="sku"></p-sortIcon></th>
+                <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+                <th pSortableColumn="reorder_level">Reorder Level <p-sortIcon field="reorder_level"></p-sortIcon></th>
+                <th class="text-center">Actions</th>
             </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-product>
+          <tr class="align-middle">
+            <td class="fw-bold text-dark">{{ product.name }}</td>
+            <td><span class="badge bg-light text-dark border">{{ product.sku }}</span></td>
+            
+            <td class="text-success fw-bold">{{ product.price | currency:'USD' }}</td>
+            
+            <td>
+              <span [ngClass]="{'text-danger fw-bold': product.reorder_level < 10, 'text-muted': product.reorder_level >= 10}">
+                {{ product.reorder_level }} units
+              </span>
+            </td>
+
+            <td class="text-center">
+              <div class="btn-group" role="group">
+                <button 
+                    class="btn btn-outline-primary btn-sm rounded-start" 
+                    (click)="editProduct(product)" 
+                    title="Edit">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+                <button 
+                    class="btn btn-outline-danger btn-sm rounded-end" 
+                    (click)="deleteProduct(product)" 
+                    title="Delete">
+                    <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
             <tr>
-
-                <td class="m-1 p-1">{{ product.name }}</td>
-                <td class="m-1 p-1">{{ product.sku }}</td>  
-                <td class="m-1 p-1">{{ product.price }}</td>
-                <td class="m-1 p-1">{{ product.reorder_level }}</td>
-                <td class="m-1 p-1">
-                    <button class="btn btn-outline-primary btn-sm p-1 m-1" (click)="editProduct(product)">Edit</button>
-                    <button class="btn btn-outline-danger btn-sm p-1 m-1" (click)="deleteProduct(product)">Delete</button>
+                <td colspan="5" class="text-center py-4 text-muted">
+                    <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                    No products found. Click "Add Product" to begin.
                 </td>
-
             </tr>
         </ng-template>
 
-    </p-table>
+      </p-table>
+    </div>
+  </div>
 </div>
