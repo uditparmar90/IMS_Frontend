@@ -3,6 +3,7 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLinkWithHref, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { privateDecrypt } from 'node:crypto';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login.css'],
 })
 export class LoginComponent {
+  public isLoading = false;
+  onchange(event: any) {
+    this.isLoading = event.target.checked;
+    
+  }
   // 1. Dependency Injection
   private http = inject(HttpClient);
   private fb = inject(FormBuilder);
@@ -26,8 +32,10 @@ export class LoginComponent {
   });
 
   onSubmit() {
+    this.isLoading=true;
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
+      console.log('Login credentials:', credentials);
 
       //http call
       this.http.post(this.apiUrl, credentials).subscribe({
@@ -35,7 +43,7 @@ export class LoginComponent {
           console.log('Login successful', response);  
           if (response && (response as any)) {
             localStorage.setItem('Token', (response as any).token);
-            this.router.navigate(['/Product']);
+            this.router.navigate(['/ProductList']);
           } 
         },
         error: (error) => {

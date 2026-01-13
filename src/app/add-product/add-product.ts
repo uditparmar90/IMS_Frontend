@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {  Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -14,6 +15,7 @@ export class AddProductComponent implements OnInit {
 
   private http = inject(HttpClient);
   private fb = inject(FormBuilder);
+  private router = inject(Router);
 
   productForm!: FormGroup;
   isEditMode = false;
@@ -61,7 +63,10 @@ export class AddProductComponent implements OnInit {
       ).subscribe({
         next: res => {
           console.log('Product added', res);
-          this.productForm.reset();
+          if(res!=="Product added successfully")
+          // this.productForm.reset();
+        this.router.navigate(['/ProductList']);
+        
         },
         error: err => console.error(err)
       });
