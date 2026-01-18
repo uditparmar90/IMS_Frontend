@@ -27,7 +27,7 @@ export class AddProductComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       sku: [''],
-      category: ['', Validators.required],
+      Category_id: ['', Validators.required],
       status: ['Active'],
       description: [''],
       price: [0, [Validators.required, Validators.min(1)]],
@@ -47,6 +47,7 @@ export class AddProductComponent implements OnInit {
     if (!this.productForm.valid) return;
 
     const payload = this.productForm.value;
+    console.log('Submitting product:', payload);
 
     if (this.isEditMode && this.productId) {
       this.http.put(

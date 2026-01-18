@@ -19,17 +19,17 @@
         <div class="card-body row g-3">
           <div class="col-md-6">
             <label class="form-label">Product Name<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" formControlName="name">
+            <input type="text" class="form-control custom-form-control" formControlName="name">
           </div>
 
           <div class="col-md-6">
             <label class="form-label">SKU</label>
-            <input type="text" class="form-control" formControlName="sku" id="sku">
+            <input type="text" class="form-control custom-form-control" formControlName="sku" id="sku">
           </div>
 
           <div class="col-md-6">
             <label class="form-label">Category<span class="text-danger">*</span></label>
-            <select class="form-select" formControlName="category" id="categorySelect">
+            <select class="form-select custom-form-control" formControlName="Category_id" id="categorySelect">
               <option value="0">Select Category</option>
               <option value="1">Electronics</option>
               <option value="2">Furniture</option>
@@ -39,7 +39,7 @@
 
           <div class="col-md-6">
             <label class="form-label">Status</label>
-            <select class="form-select" formControlName="status">
+            <select class="form-select custom-form-control" formControlName="status">
               <option value="0">Select status</option>
               <option value="1">Active</option>
               <option value="0">Inactive</option>
@@ -48,7 +48,7 @@
 
           <div class="col-12">
             <label class="form-label">Description</label>
-            <textarea rows="3" class="form-control" formControlName="description"></textarea>
+            <textarea rows="3" class="form-control custom-form-control" formControlName="description"></textarea>
           </div>
         </div>
       </div>
@@ -65,17 +65,17 @@
         <div class="card-body">
           <div class="mb-3">
             <label class="form-label">Price<span class="text-danger">*</span></label>
-            <input type="number" class="form-control" formControlName="price">
+            <input type="number" class="form-control custom-form-control" formControlName="price">
           </div>
 
           <div class="mb-3">
             <label class="form-label">Opening Stock<span class="text-danger">*</span></label>
-            <input type="number" class="form-control" formControlName="quantity">
+            <input type="number" class="form-control custom-form-control" formControlName="quantity">
           </div>
 
           <div class="mb-3">
             <label class="form-label">Reorder Level<span class="text-danger">*</span></label>
-            <input type="number" class="form-control" formControlName="reorderLevel">
+            <input type="number" class="form-control custom-form-control" formControlName="reorderLevel">
           </div>
         </div>
       </div>
