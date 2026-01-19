@@ -28,11 +28,11 @@ export class AddProductComponent implements OnInit {
       name: ['', Validators.required],
       sku: [''],
       Category_id: ['', Validators.required],
-      status: ['Active'],
+      IsActive: [true, Validators.required  ],
       description: [''],
       price: [0, [Validators.required, Validators.min(1)]],
       quantity: [0, Validators.required],
-      reorderLevel: [0, Validators.required],
+      Reorder_level: [0, Validators.required],
     });
 
     if (product) {

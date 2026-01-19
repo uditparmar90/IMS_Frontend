@@ -30,7 +30,7 @@
           <div class="col-md-6">
             <label class="form-label">Category<span class="text-danger">*</span></label>
             <select class="form-select custom-form-control" formControlName="Category_id" id="categorySelect">
-              <option value="0">Select Category</option>
+              <option value="0">select Category</option>
               <option value="1">Electronics</option>
               <option value="2">Furniture</option>
               <option value="3">Grocery</option>
@@ -38,12 +38,7 @@
           </div>
 
           <div class="col-md-6">
-            <label class="form-label">Status</label>
-            <select class="form-select custom-form-control" formControlName="status">
-              <option value="0">Select status</option>
-              <option value="1">Active</option>
-              <option value="0">Inactive</option>
-            </select>
+            <input type="checkbox" formControlName="IsActive"> <label class="form-label">Active</label>
           </div>
 
           <div class="col-12">
@@ -75,7 +70,7 @@
 
           <div class="mb-3">
             <label class="form-label">Reorder Level<span class="text-danger">*</span></label>
-            <input type="number" class="form-control custom-form-control" formControlName="reorderLevel">
+            <input type="number" class="form-control custom-form-control" formControlName="Reorder_level">
           </div>
         </div>
       </div>

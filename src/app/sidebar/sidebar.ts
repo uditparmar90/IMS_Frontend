@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLinkWithHref } from "@angular/router";
-import { NgClass, NgIf } from '@angular/common';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterOutlet, NgIf, NgClass, RouterLinkWithHref],
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.html',
-  styleUrl: './sidebar.css',
+  styleUrls: ['./sidebar.css']
 })
-export class Sidebar {
-  isCollapsed = false;
+  export class Sidebar {
+  // Controls the mobile "hamburger" menu state
+  isCollapsed = true; 
 
-  toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
+  // Optional: Close menu when a link is clicked (Better UX on mobile)
+  closeMenu() {
+    this.isCollapsed = true;
   }
 }
