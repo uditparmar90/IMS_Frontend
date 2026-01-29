@@ -1,103 +1,71 @@
-/* Layout */
-.app-layout {
-  min-height: 100vh;
-  background: #f4f6f9;
+/* Navbar Styling */
+.navbar {
+  /* Gives the navbar a slight transparency effect */
+  background: rgba(33, 37, 41, 0.95) !important;
+  backdrop-filter: blur(10px);
 }
 
-/* Sidebar */
-.sidebar {
-  width: 260px;
-  background: linear-gradient(180deg, #0f172a, #020617);
-  color: #e5e7eb;
-  transition: width 0.3s ease;
-  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.25);
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
-.sidebar.collapsed {
-  width: 80px;
+/* Navigation Links */
+.nav-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7) !important;
+  transition: all 0.2s ease-in-out;
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px;
 }
 
-/* Header */
-.sidebar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+/* Hover Effect */
+.nav-link:hover {
+  color: #fff !important;
+  /* background-color: rgba(255, 255, 255, 0.1); */
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  font-weight: 600;
+/* Active Link State (Current Page) */
+.nav-link.active {
+  color: #3e8bff !important; /* Bootstrap Primary Blue */
+  text-shadow: 0 6px 8px rgba(13, 110, 253, 0.3);
 }
 
-.brand i {
-  font-size: 22px;
-  color: #38bdf8;
-}
-
-.toggle-btn {
-  background: transparent;
+/* Dropdown Menu Tweaks */
+.dropdown-menu {
   border: none;
-  color: #cbd5f5;
-  font-size: 18px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  margin-top: 10px; /* Slight gap from the navbar */
 }
 
-/* Menu */
-.menu {
-  list-style: none;
-  padding: 12px;
-  margin: 0;
+.dropdown-item {
+  padding: 8px 16px;
 }
 
-.menu li {
-  margin-bottom: 6px;
+.dropdown-item:active {
+  color: #fda90d;
+  background-color: whitesmoke;
 }
 
-.menu a {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 14px;
-  border-radius: 10px;
-  color: #e5e7eb;
-  text-decoration: none;
-  transition: all 0.25s ease;
+/* Main Content Padding */
+main.container {
+  min-height: 80vh; /* Ensures footer stays down if you have one */
 }
 
-.menu a i {
-  font-size: 18px;
-  min-width: 24px;
-  text-align: center;
+.nav-item.dropdown:hover > .dropdown-menu {
+  display: block;
+  margin-top: 0;
 }
 
-/* Hover */
-.menu a:hover {
-  background: rgba(56, 189, 248, 0.15);
-  color: #ffffff;
-}
-
-/* Active */
-.menu a.active {
-  background: rgba(56, 189, 248, 0.25);
-  color: #ffffff;
-  box-shadow: inset 4px 0 0 #38bdf8;
-}
-
-/* Collapsed adjustments */
-.sidebar.collapsed .menu a {
-  justify-content: center;
-}
-
-.sidebar.collapsed .brand span {
+.nav-item.dropdown > .dropdown-menu {
   display: none;
 }
-
-/* Content */
-.content {
-  flex-grow: 1;
-  padding: 24px;
+.dropdown-toggle:hover > .dropdown-menu {   
+  display: block;
+  margin-top: 0;
+}
+.dropdown-toggle > .dropdown-menu {   
+  display: none;
 }

@@ -1,0 +1,31 @@
+<form [formGroup]="subCategoryForm" action="">
+
+    <select class="form-select custom-form-select" formControlName="parentCategoryId"
+        aria-label="Default select example">
+        <option selected>Select Parent Category</option>
+        <option value="1"> Category2</option>
+        <option value="2"> Category1</option>
+        <option *ngFor="let category of parentCategories" [value]="category.id">
+            {{ category.categoryName }}
+        </option>
+    </select>
+    <div class="col-md-6">
+        <label class="form-label">Sub Category Name</label>
+        <input type="text" class="form-control custom-form-control" formControlName="subCategoryName"
+            id="subCategoryName">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Description</label>
+        <input type="text" class="form-control custom-form-control" formControlName="description" id="description">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Is Active</label>
+        <input type="checkbox" class="form-check-input custom-form-check-input" formControlName="isActive"
+            id="isActive">
+    </div>
+
+
+    <div class="col-md-6"></div>
+
+
+</form>
