@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLinkWithHref, Router } from '@angular/router';
@@ -11,7 +11,24 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  autoUsername: string | null = null;
+  autoPassword: string | null = null;
+  ngOnInit(): void {
+    this.autoUsername = localStorage.getItem('IMSUsername');
+    this.autoPassword = localStorage.getItem('IMSPassword');
+    console.log(`this.autoUsername : ${this.autoUsername}`);
+    console.log(`this.autoPassword : ${this.autoPassword}`);
+    if (this.autoUsername && this.autoPassword) {
+      this.loginForm.patchValue({
+        email: this.autoUsername,
+        password: this.autoPassword,
+      });
+      this.onSubmit();
+    }
+    
+  }
+
   // 1. Dependency Injection
   private http = inject(HttpClient);
   private fb = inject(FormBuilder);
@@ -28,7 +45,12 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
+      localStorage.setItem('IMSUsername', credentials.email || '');
+      localStorage.setItem('IMSPassword', credentials.password || '');
+      console.log(localStorage.getItem('IMSUsername'));
+      console.log(localStorage.getItem('IMSPassword'));
 
+      
       //http call
       this.http.post(this.apiUrl, credentials).subscribe({
         next: (response) => {

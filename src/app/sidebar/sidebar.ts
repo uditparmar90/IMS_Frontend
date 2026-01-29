@@ -14,4 +14,10 @@ export class Sidebar {
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
   }
+  logout() {
+    localStorage.removeItem('Token');
+    localStorage.removeItem('IMSUsername');
+    localStorage.removeItem('IMSPassword');
+    window.location.href = '/';
+  }
 }

@@ -18,6 +18,7 @@
 
     <!-- <router-outlet> -->
     <!-- Menu -->
+     <div style="display: flex; flex-direction: column; justify-content:space-between ; height: 100vh;">
     <ul class="menu">
       <li>
         <a routerLink="/ProductList" routerLinkActive="active">
@@ -54,6 +55,27 @@
         </a>
       </li>
     </ul>
+    <ul class="menu">
+
+      <li>
+        <!-- <a routerLink="/logout" routerLinkActive="active"> -->
+          <div class="text-danger" routerLinkActive="active" style="    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.25s ease;">
+<i class="bi bi-box-arrow-right"></i>
+          <span *ngIf="!isCollapsed" (click)="logout()" style="cursor: pointer;">Logout</span>
+
+
+          </div>
+          
+        <!-- </a> -->
+      </li>
+    </ul>
+    </div>
     <!-- </router-outlet> -->
   </aside>
 
