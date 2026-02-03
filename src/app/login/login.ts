@@ -14,9 +14,11 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent implements OnInit {
   autoUsername: string | null = null;
   autoPassword: string | null = null;
+isLoading: any;
+errorMessage: any;
   ngOnInit(): void {
-    this.autoUsername = localStorage.getItem('IMSUsername');
-    this.autoPassword = localStorage.getItem('IMSPassword');
+    this.autoUsername = window.localStorage.getItem('IMSUsername');
+    this.autoPassword = window.localStorage.getItem('IMSPassword');
     console.log(`this.autoUsername : ${this.autoUsername}`);
     console.log(`this.autoPassword : ${this.autoPassword}`);
     if (this.autoUsername && this.autoPassword) {
@@ -57,6 +59,7 @@ export class LoginComponent implements OnInit {
           console.log('Login successful', response);  
           if (response && (response as any)) {
             localStorage.setItem('Token', (response as any).token);
+            sessionStorage.setItem('Token', (response as any).token);
             this.router.navigate(['/Product']);
           } 
         },

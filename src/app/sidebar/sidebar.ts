@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLinkWithHref } from "@angular/router";
-import { NgClass, NgIf } from '@angular/common';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterOutlet, NgIf, NgClass, RouterLinkWithHref],
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive, RouterOutlet],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })
-export class Sidebar {
-  isCollapsed = false;
-
-  toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed;
+export class SidebarComponent {
+  isloggedIn(): boolean {
+    return localStorage.getItem('Token') !== null;
   }
+
   logout() {
     localStorage.removeItem('Token');
     localStorage.removeItem('IMSUsername');
