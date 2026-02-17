@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet],
   templateUrl: './sidebar.html',
-  styleUrls: ['./sidebar.css']
+  styleUrl: './sidebar.css',
 })
-  export class Sidebar {
-  // Controls the mobile "hamburger" menu state
-  isCollapsed = true; 
+export class SidebarComponent {
+  isloggedIn(): boolean {
+    return localStorage.getItem('Token') !== null;
+  }
 
-  // Optional: Close menu when a link is clicked (Better UX on mobile)
-  closeMenu() {
-    this.isCollapsed = true;
+  logout() {
+    localStorage.removeItem('Token');
+    localStorage.removeItem('IMSUsername');
+    localStorage.removeItem('IMSPassword');
+    window.location.href = '/';
   }
 }

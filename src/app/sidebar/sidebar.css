@@ -1,8 +1,7 @@
-/* Navbar Styling */
-.navbar {
-  /* Gives the navbar a slight transparency effect */
-  background: rgba(33, 37, 41, 0.95) !important;
+.ims-navbar {
+  background: rgba(16, 164, 201, 0.822);
   backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
 .navbar-brand {
@@ -10,62 +9,28 @@
   letter-spacing: 0.5px;
 }
 
-/* Navigation Links */
+/* Nav links */
 .nav-link {
-  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75) !important;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.7) !important;
-  transition: all 0.2s ease-in-out;
-  padding: 0.5rem 1rem !important;
-  border-radius: 6px;
+  border-radius: 8px;
+  padding: 8px 14px;
+  transition: all 0.25s ease;
 }
 
-/* Hover Effect */
 .nav-link:hover {
   color: #fff !important;
-  /* background-color: rgba(255, 255, 255, 0.1); */
+  background: rgba(255, 255, 255, 0.08);
 }
 
-/* Active Link State (Current Page) */
+/* Active link */
 .nav-link.active {
-  color: #3e8bff !important; /* Bootstrap Primary Blue */
-  text-shadow: 0 6px 8px rgba(13, 110, 253, 0.3);
+  color: #3e8bff !important;
+  background: rgba(62, 139, 255, 0.15);
+  box-shadow: inset 0 0 0 1px rgba(62, 139, 255, 0.35);
 }
 
-/* Dropdown Menu Tweaks */
-.dropdown-menu {
-  border: none;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
-  margin-top: 10px; /* Slight gap from the navbar */
-}
-
-.dropdown-item {
-  padding: 8px 16px;
-}
-
-.dropdown-item:active {
-  color: #fda90d;
-  background-color: whitesmoke;
-}
-
-/* Main Content Padding */
-main.container {
-  min-height: 80vh; /* Ensures footer stays down if you have one */
-}
-
-.nav-item.dropdown:hover > .dropdown-menu {
-  display: block;
-  margin-top: 0;
-}
-
-.nav-item.dropdown > .dropdown-menu {
-  display: none;
-}
-.dropdown-toggle:hover > .dropdown-menu {   
-  display: block;
-  margin-top: 0;
-}
-.dropdown-toggle > .dropdown-menu {   
-  display: none;
+/* Page spacing below fixed navbar */
+.page-content {
+  padding-top: 80px;
 }
