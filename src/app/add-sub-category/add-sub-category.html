@@ -1,31 +1,86 @@
-<form [formGroup]="subCategoryForm" action="">
+<div class="card shadow-sm border-0 rounded-4">
+  <div class="card-body p-4">
+    <h5 class="card-title mb-4 fw-bold text-secondary">
+      <i class="bi bi-layers-fill me-2"></i>Manage Sub Category
+    </h5>
 
-    <select class="form-select custom-form-select" formControlName="parentCategoryId"
-        aria-label="Default select example">
-        <option selected>Select Parent Category</option>
-        <option value="1"> Category2</option>
-        <option value="2"> Category1</option>
-        <option *ngFor="let category of parentCategories" [value]="category.id">
-            {{ category.categoryName }}
-        </option>
-    </select>
-    <div class="col-md-6">
-        <label class="form-label">Sub Category Name</label>
-        <input type="text" class="form-control custom-form-control" formControlName="subCategoryName"
-            id="subCategoryName">
-    </div>
-    <div class="col-md-6">
-        <label class="form-label">Description</label>
-        <input type="text" class="form-control custom-form-control" formControlName="description" id="description">
-    </div>
-    <div class="col-md-6">
-        <label class="form-label">Is Active</label>
-        <input type="checkbox" class="form-check-input custom-form-check-input" formControlName="isActive"
-            id="isActive">
-    </div>
+    <form [formGroup]="subCategoryForm" (ngSubmit)="onSubmit()">
+      <div class="row g-3">
+        
+        <div class="col-md-12">
+          <div class="form-floating">
+            <select 
+              class="form-select" 
+              id="parentCategoryId" 
+              formControlName="parentCategoryId"
+              [class.is-invalid]="isFieldInvalid('parentCategoryId')">
+              <option [ngValue]="null" disabled selected>Select a parent category</option>
+              
+              <option value="1">Category2</option>
+              <option value="2">Category1</option>
+              
+              <option *ngFor="let category of parentCategories" [value]="category.id">
+                {{ category.categoryName }}
+              </option>
+            </select>
+            <label for="parentCategoryId">Parent Category</label>
+            
+            <div class="invalid-feedback">
+              Please select a parent category.
+            </div>
+          </div>
+        </div>
 
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input 
+              type="text" 
+              class="form-control" 
+              id="subCategoryName" 
+              formControlName="subCategoryName" 
+              placeholder="e.g. Electronics"
+              [class.is-invalid]="isFieldInvalid('subCategoryName')">
+            <label for="subCategoryName">Sub Category Name</label>
+            <div class="invalid-feedback">
+              Name is required.
+            </div>
+          </div>
+        </div>
 
-    <div class="col-md-6"></div>
+        <div class="col-md-12">
+          <div class="form-floating">
+            <textarea 
+              class="form-control" 
+              placeholder="Leave a description here" 
+              id="description" 
+              formControlName="description" 
+              style="height: 100px"></textarea>
+            <label for="description">Description (Optional)</label>
+          </div>
+        </div>
 
+        <div class="col-md-6 d-flex align-items-center mt-3">
+          <div class="form-check form-switch custom-switch">
+            <input 
+              class="form-check-input" 
+              type="checkbox" 
+              role="switch" 
+              id="isActive" 
+              formControlName="isActive">
+            <label class="form-check-label fw-semibold ms-2" for="isActive">
+              {{ subCategoryForm.get('isActive')?.value ? 'Active' : 'Inactive' }}
+            </label>
+          </div>
+        </div>
 
-</form>
+        <div class="col-12 text-end mt-4">
+          <button type="button" class="btn btn-light text-secondary me-2 px-4 rounded-pill" (click)="onCancel()">Cancel</button>
+          <button type="submit" class="btn btn-primary px-4 rounded-pill" [disabled]="subCategoryForm.invalid">
+            Save Changes
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>

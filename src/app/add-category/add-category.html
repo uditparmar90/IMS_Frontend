@@ -1,15 +1,65 @@
-<form [formGroup]="categoryForm" action="">
-<div class="col-md-6">
-            <label class="form-label">Category Name</label>
-            <input type="text" class="form-control custom-form-control" formControlName="categoryName" id="categoryName">
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Description</label>
-            <input type="text" class="form-control custom-form-control" formControlName="description" id="description">
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Is Active</label>
-            <input type="checkbox" class="form-check-input custom-form-check-input" formControlName="isActive" id="isActive">
-          </div>
+<div class="card shadow-sm border-0 rounded-4">
+  <div class="card-body p-4">
+    <h5 class="card-title mb-4 fw-bold text-secondary">
+      <i class="bi bi-tags-fill me-2"></i>Manage Category
+    </h5>
 
-</form>
+    <form [formGroup]="categoryForm" (ngSubmit)="onCategorySubmit()">
+      <div class="row g-3">
+        
+        <div class="col-md-12">
+          <div class="form-floating">
+            <input 
+              type="text" 
+              class="form-control" 
+              id="categoryName" 
+              formControlName="categoryName" 
+              placeholder="e.g. Electronics"
+              [class.is-invalid]="isFieldInvalid('categoryName')">
+            <label for="categoryName">Category Name</label>
+            
+            <div class="invalid-feedback">
+              Category Name is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-floating">
+            <textarea 
+              class="form-control" 
+              placeholder="Description" 
+              id="description" 
+              formControlName="description" 
+              style="height: 100px"></textarea>
+            <label for="description">Description (Optional)</label>
+          </div>
+        </div>
+
+        <div class="col-md-12 d-flex align-items-center mt-3">
+          <div class="form-check form-switch custom-switch">
+            <input 
+              class="form-check-input" 
+              type="checkbox" 
+              role="switch" 
+              id="isCategoryActive" 
+              formControlName="isActive">
+            <label class="form-check-label fw-semibold ms-2" for="isCategoryActive">
+              {{ categoryForm.get('isActive')?.value ? 'Active Status' : 'Inactive Status' }}
+            </label>
+          </div>
+        </div>
+
+        <div class="col-12 text-end mt-4">
+          <button type="button" class="btn btn-light text-secondary me-2 px-4 rounded-pill" (click)="onCancel()">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary px-4 rounded-pill" [disabled]="categoryForm.invalid">
+            Create Category
+          </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>

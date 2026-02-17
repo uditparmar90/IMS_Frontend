@@ -22,5 +22,26 @@ subCategoryForm: any;
 
 
   }
+  // In your component class
+isFieldInvalid(fieldName: string): boolean {
+  const field = this.subCategoryForm.get(fieldName);
+  // Show error only if field is invalid AND has been touched or dirty
+  return !!(field && field.invalid && (field.dirty || field.touched));
+}
+
+onSubmit() {
+  if (this.subCategoryForm.valid) {
+    console.log(this.subCategoryForm.value);
+    // Call your service here
+  } else {
+    // Trigger validation display if user clicks save on empty form
+    this.subCategoryForm.markAllAsTouched();
+  }
+}
+
+onCancel() {
+  this.subCategoryForm.reset();
+  // Or navigate away
+}
 
 }
