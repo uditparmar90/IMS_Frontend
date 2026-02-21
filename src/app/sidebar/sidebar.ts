@@ -9,14 +9,17 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './sidebar.css',
 })
 export class SidebarComponent {
-  isloggedIn(): boolean {
-    return localStorage.getItem('Token') !== null;
+  islogin: boolean = false;
+  afternextRender() {
+    this.islogin = localStorage.getItem('Token') ? true : false;
   }
+  
+  
 
   logout() {
     localStorage.removeItem('Token');
     localStorage.removeItem('IMSUsername');
     localStorage.removeItem('IMSPassword');
-    window.location.href = '/';
+    window.location.href = '/ProductLists';
   }
 }

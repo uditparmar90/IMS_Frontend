@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { afterNextRender, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLinkWithHref, Router } from '@angular/router';
@@ -11,12 +11,13 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent  {
   autoUsername: string | null = null;
   autoPassword: string | null = null;
 isLoading: any;
 errorMessage: any;
-  ngOnInit(): void {
+constructor() {
+  afterNextRender(() => {
     this.autoUsername = window.localStorage.getItem('IMSUsername');
     this.autoPassword = window.localStorage.getItem('IMSPassword');
     console.log(`this.autoUsername : ${this.autoUsername}`);
@@ -28,8 +29,14 @@ errorMessage: any;
       });
       this.onSubmit();
     }
-    
   }
+  );}
+
+
+  // ngOnInit(): void {
+    
+    
+  // }
 
   // 1. Dependency Injection
   private http = inject(HttpClient);
