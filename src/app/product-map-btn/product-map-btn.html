@@ -1,0 +1,55 @@
+<div class="container-fluid vh-100 bg-light">
+  <div class="row h-100">
+    
+    <div class="col-md-8 d-flex flex-column p-3">
+      <ul class="nav nav-pills mb-3 bg-white p-2 rounded shadow-sm">
+        <li class="nav-item"><a class="nav-link active" href="#">All Items</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Beverages</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Food</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Merch</a></li>
+      </ul>
+
+      <div class="row row-cols-2 row-cols-lg-4 g-3 overflow-auto" style="max-height: 85vh;">
+        @for (product of ProdList; track product.id){
+            <div class="col">
+          <button class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0">
+            <img src="https://via.placeholder.com/150x100" class="card-img-top" alt="Product">
+            <div class="card-body p-2 text-center">
+              <h6 class="card-title mb-1 text-dark">{{product.name}}</h6>
+              <span class="badge bg-success text-white">${{product.price}}</span>
+            </div>
+          </button>
+        </div>
+
+        }@empty {
+    <p>No products found in this category.</p>
+  }
+        
+
+        
+      </div>
+    </div>
+
+    <div class="col-md-4 bg-white border-start d-flex flex-column p-0">
+      <div class="p-3 border-bottom bg-dark text-white">
+        <h5 class="mb-0">Current Order</h5>
+      </div>
+      
+      <div class="flex-grow-1 overflow-auto p-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span><strong>1x</strong> Espresso</span>
+          <span>$4.50</span>
+        </div>
+      </div>
+
+      <div class="p-3 border-top bg-light">
+        <div class="d-flex justify-content-between h4">
+          <span>Total</span>
+          <span class="text-primary font-weight-bold">$4.50</span>
+        </div>
+        <button class="btn btn-primary w-100 btn-lg mt-2 py-3 shadow">CHECKOUT</button>
+      </div>
+    </div>
+
+  </div>
+</div>
