@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { inject } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { HttpClient } from  '@angular/common/http';
+import { PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-product-map-btn',
   imports: [],
@@ -9,10 +10,21 @@ import { HttpClient } from  '@angular/common/http';
 })
 export class ProductMapBtn implements OnInit {
   private httpClient=inject(HttpClient);
-  ProdList: any[] = [];
-  
+  ProdList = signal<any[]>([]);
+  // inside the class
+platformId = inject(PLATFORM_ID);
   ngOnInit() {
-    this.httpClient.get<any>('https://localhost:44398/api/Product/GetAllProducts',{}).subscribe(data=>{this.ProdList=data;console.log('ProdData : '+data)})
+  if (isPlatformBrowser(this.platformId)) { 
+    this.httpClient.get<any>('/api/Product/GetAllProducts').subscribe(data => {
+      this.ProdList.set(data);
+      // loop inside subscribe
+      this.ProdList().forEach(element => {
+         console.log('ProdList : ' + element);
+      });
+    });
   }
+}
+ 
+ 
 
 }

@@ -15,7 +15,7 @@ export class ProductListComponent {
   private httpClient = inject(HttpClient);
   private router = inject(Router);
 
-  products = this.httpClient.get<any[]>('https://localhost:44398/api/Product/GetAllProducts')
+  products = this.httpClient.get<any[]>('/api/Product/GetAllProducts')
     .pipe(
       tap(data => console.log('Data received:', data))
     );

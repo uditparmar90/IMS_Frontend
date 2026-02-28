@@ -44,7 +44,7 @@ constructor() {
   private router = inject(Router);
 
   // 2. API URL
-  private apiUrl = 'https://localhost:44398/api/Authorize/login';
+  private apiUrl = '/api/Authorize/login';
   // 3. Login Function
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -65,8 +65,8 @@ constructor() {
         next: (response) => {
           console.log('Login successful', response);  
           if (response && (response as any)) {
-            localStorage.setItem('Token', (response as any).token);
-            sessionStorage.setItem('Token', (response as any).token);
+            localStorage.setItem('token', (response as any).token);
+            sessionStorage.setItem('token', (response as any).token);
             this.router.navigate(['/Product']);
           } 
         },

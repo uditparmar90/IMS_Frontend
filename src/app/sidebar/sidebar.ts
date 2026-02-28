@@ -11,13 +11,13 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 export class SidebarComponent {
   islogin: boolean = false;
   afternextRender() {
-    this.islogin = localStorage.getItem('Token') ? true : false;
+    this.islogin = localStorage.getItem('token') ? true : false;
   }
   
   
 
   logout() {
-    localStorage.removeItem('Token');
+    localStorage.removeItem('token');
     localStorage.removeItem('IMSUsername');
     localStorage.removeItem('IMSPassword');
     window.location.href = '/ProductLists';

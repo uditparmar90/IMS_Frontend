@@ -51,7 +51,7 @@ export class AddProductComponent implements OnInit {
 
     if (this.isEditMode && this.productId) {
       this.http.put(
-        `https://localhost:44398/api/Product/Update/${this.productId}`,
+        `/api/Product/Update/${this.productId}`,
         payload
       ).subscribe({
         next: res => console.log('Product updated', res),
@@ -59,7 +59,7 @@ export class AddProductComponent implements OnInit {
       });
     } else {
       this.http.post(
-        'https://localhost:44398/api/Product/Insert',
+        '/api/Product/Insert',
         payload
       ).subscribe({
         next: res => {

@@ -10,7 +10,7 @@
       </ul>
 
       <div class="row row-cols-2 row-cols-lg-4 g-3 overflow-auto" style="max-height: 85vh;">
-        @for (product of ProdList; track product.id){
+        @for (product of ProdList(); track product.id){
             <div class="col">
           <button class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0">
             <img src="https://via.placeholder.com/150x100" class="card-img-top" alt="Product">
