@@ -27,7 +27,7 @@ constructor() {
         email: this.autoUsername,
         password: this.autoPassword,
       });
-      this.onSubmit();
+      // this.onSubmit();
     }
   }
   );}
@@ -67,7 +67,7 @@ constructor() {
           if (response && (response as any)) {
             localStorage.setItem('token', (response as any).token);
             sessionStorage.setItem('token', (response as any).token);
-            this.router.navigate(['/Product']);
+            this.router.navigate(['/ProductMapBtn']);
           } 
         },
         error: (error) => {

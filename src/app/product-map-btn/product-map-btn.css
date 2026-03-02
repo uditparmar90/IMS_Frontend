@@ -31,3 +31,74 @@
 .nav-pills .nav-link.active {
     background-color: #0d6efd;
 }
+
+
+/* for + n - btn styles  */
+:root {
+  --bg-color: #0f172a;
+  --accent-color: #38bdf8;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+}
+
+.liquid-pill {
+  display: flex;
+  align-items: center;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  padding: 6px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Reactive Scale Effect */
+.liquid-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+.ctrl-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: grid;
+  place-items: center;
+}
+
+.ctrl-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--accent-color);
+}
+
+.ctrl-btn:active {
+  transform: scale(0.8);
+}
+
+.value-display {
+  min-width: 40px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  /* color: white; */
+  font-variant-numeric: tabular-nums; /* Prevents text jumping */
+}
+
+/* The "Pulse" animation when value changes */
+.count-text {
+  display: inline-block;
+  animation: pop 0.3s ease-out;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); color: var(--accent-color); }
+  100% { transform: scale(1); }
+}

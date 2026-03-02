@@ -1,6 +1,5 @@
 <div class="container-fluid vh-100 bg-light">
   <div class="row h-100">
-    
     <div class="col-md-8 d-flex flex-column p-3">
       <ul class="nav nav-pills mb-3 bg-white p-2 rounded shadow-sm">
         <li class="nav-item"><a class="nav-link active" href="#">All Items</a></li>
@@ -12,7 +11,7 @@
       <div class="row row-cols-2 row-cols-lg-4 g-3 overflow-auto" style="max-height: 85vh;">
         @for (product of ProdList(); track product.id){
             <div class="col">
-          <button class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0">
+          <button class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0" (click)="addToOrder(product)">
             <img src="https://via.placeholder.com/150x100" class="card-img-top" alt="Product">
             <div class="card-body p-2 text-center">
               <h6 class="card-title mb-1 text-dark">{{product.name}}</h6>
@@ -20,13 +19,18 @@
             </div>
           </button>
         </div>
-
+        <div class="counter-container" style="display: none;">
+        <div class="liquid-pill">
+          <button class="ctrl-btn minus" >—</button>
+          <div class="value-display">
+            <span class="count-text">{{ ProductCounter() }}</span>
+          </div>
+          <button class="ctrl-btn plus" >+</button>
+        </div>
+      </div>
         }@empty {
-    <p>No products found in this category.</p>
-  }
-        
-
-        
+          <p>No products found in this category.</p>
+        }
       </div>
     </div>
 
@@ -36,18 +40,41 @@
       </div>
       
       <div class="flex-grow-1 overflow-auto p-3">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <span><strong>1x</strong> Espresso</span>
-          <span>$4.50</span>
+        <div class="d-flex justify-content-between align-items-center mb-3 w-100">
+          <table>
+            <thead>
+              <tr> 
+                <th>Qunat.</th>
+                <th>Item</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of cartProd(); track item.id) {
+            <tr class="align-middle">
+              <td><strong>{{item.quantity}} x</strong></td>
+              <td> {{item.name}}</td>
+              <td>${{item.price}}</td>
+            </tr>
+          }
+
+
+            </tbody>
+          
+          </table>
+          
         </div>
       </div>
 
       <div class="p-3 border-top bg-light">
         <div class="d-flex justify-content-between h4">
           <span>Total</span>
-          <span class="text-primary font-weight-bold">$4.50</span>
+          <span class="text-primary font-weight-bold" onclick="cancelAll()">${{totalamount()}}</span>
         </div>
-        <button class="btn btn-primary w-100 btn-lg mt-2 py-3 shadow">CHECKOUT</button>
+        <div class="d-flex justify-content-between ">
+          <button class="btn btn-danger w-20 btn-lg mt-2 py-3 shadow" onclick="cancelAll()">Cencel </button>
+          <button class="btn btn-primary w-70 btn-lg mt-2 py-3 shadow">Checkout</button>
+        </div>
       </div>
     </div>
 

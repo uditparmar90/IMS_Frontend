@@ -11,9 +11,10 @@ export const routes: Routes = [
     {path:'',component:LoginComponent,pathMatch: 'full'},
     {path:'signUp',component:SignupComponent},
     {path:'Product',component:AddProductComponent},
-    {path:'ProductList',component:ProductListComponent,pathMatch:'full'},
+    {path:'ProductList',component:ProductListComponent},
     {path:'manageCategories',component:AddCategory},
     {path:'manageSubCategories',component:AddSubCategory},
-    {path:'ProductMapBtn',component:ProductMapBtn}
+    {path:'ProductMapBtn',component:ProductMapBtn},
+    {path:'**',redirectTo:'',pathMatch:'full'}
 
 ];  
