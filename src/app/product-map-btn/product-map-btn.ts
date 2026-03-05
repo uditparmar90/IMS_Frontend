@@ -59,8 +59,21 @@ addToOrder(product: any) {
     this.cartProd.set([...this.cartProd(),{id:product.id,name:product.name,price:product.price,quantity:1}]);
   }
 }
+deleteFromOrder(product: any) {
+  let currentCart = this.cartProd();
+  let existingItem=currentCart.find((data: { id: any; })=>data.id===product.id);
+  if (existingItem) {
+    if(existingItem.quantity==1){
+      this.cartProd.update(card=>card.filter(data2=>data2.id!=product.id));
+    }
+    this.cartProd.update(cart => cart.map(data2 => data2.id == product.id ? {...data2, quantity: data2.quantity - 1} : data2));
+    this.totalamount.set(this.totalamount()- existingItem.price);
+  }
+}
 cancelAll() {
   this.totalamount.set(0);
+  this.cartProd.set([]);
+  this.ProductCounter.set(0);
 }
 
 }
