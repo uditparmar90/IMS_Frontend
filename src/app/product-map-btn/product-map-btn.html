@@ -10,7 +10,7 @@
 
       <div class="row row-cols-2 row-cols-lg-4 g-3 overflow-auto" style="max-height: 85vh;">
         @for (product of ProdList(); track product.id){
-            <div class="col">
+        <div class="col">
           <button class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0" (click)="addToOrder(product)">
             <img src="Images/ProductDummy.jpg" class="card-img-top" alt="Product">
             <div class="card-body p-2 text-center">
@@ -20,16 +20,16 @@
           </button>
         </div>
         <div class="counter-container" style="display: none;">
-        <div class="liquid-pill">
-          <button class="ctrl-btn minus" >—</button>
-          <div class="value-display">
-            <span class="count-text">{{ ProductCounter() }}</span>
+          <div class="liquid-pill">
+            <button class="ctrl-btn minus">—</button>
+            <div class="value-display">
+              <span class="count-text">{{ ProductCounter() }}</span>
+            </div>
+            <button class="ctrl-btn plus">+</button>
           </div>
-          <button class="ctrl-btn plus" >+</button>
         </div>
-      </div>
         }@empty {
-          <p>No products found in this category.</p>
+        <p>No products found in this category.</p>
         }
       </div>
     </div>
@@ -39,38 +39,47 @@
         <h5 class="mb-0">Current Order</h5>
       </div>
       <div class="p-3 border-top bg-light">
-      <div class="d-flex justify-content-between h4">
-        <span>Total</span>
-        <span class="text-primary font-weight-bold">${{totalamount()}}</span>
-      </div>
-      <div class="d-flex justify-content-between ">
-        <button class="btn  w-20 btn-lg mt-2 py-3 shadow" (click)="cancelAll()">Cencel </button>
-        <button class="btn btn-primary w-70 btn-lg mt-2 py-3 shadow">Checkout</button>
-      </div>
-    </div>
-
-      <div class="overflow-auto" style="max-height: 70vh; height: 70vh;">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-12 d-flex align-items-center py-2 border-bottom font-weight-bold">
-            <span class="col-2">Qunat.</span>
-            <span class="col-6">Item</span>
-            <span class="col-3">Price</span>
-            <span class="col-1"></span>
-          </div>
-          @for (item of cartProd(); track item.id){
-            <div class="col-12 d-flex align-items-center py-2 border-bottom">
-              <span class="col-2">{{item.quantity}}</span>
-              <span class="col-6">{{item.name}}</span>
-              <span class="col-3 text-primary font-weight-bold">${{item.price}}</span>
-              <button class="btn btn-sm btn-danger col-1" (click)="deleteFromOrder(item)"><i class="bi bi-x-circle"></i></button>
-            </div>
-          }
+        <div class="d-flex justify-content-between h4">
+          <span>Total</span>
+          <span class="text-primary font-weight-bold">${{totalamount()}}</span>
+        </div>
+        <div class="d-flex justify-content-between ">
+          <button class="btn  w-20 btn-lg mt-2 py-3 shadow" (click)="cancelAll()">Cencel </button>
+          <button class="btn btn-primary w-70 btn-lg mt-2 py-3 shadow">Checkout</button>
         </div>
       </div>
+
+      <div class="overflow-auto" style="max-height: 70vh; height: 70vh;">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-12 d-flex align-items-center py-2 border-bottom font-weight-bold">
+              <span class="col-1">No.</span>
+              <span class="col-6">Item</span>
+              <span class="col-2">Price</span>
+              <span class="col-2">Qunat.</span>
+            </div>
+            @for (item of cartProd(); track item.id){
+            <div class="col-12 d-flex align-items-center py-2 border-bottom">
+              <!-- <span class="col-2">{{item.quantity}}</span> -->
+              <span class="col-1">
+                
+              </span>
+              <span class="col-6">{{item.name}}</span>
+              <span class="col-2 text-primary font-weight-bold">${{item.price}}</span>
+              <!-- <button class="btn btn-sm btn-danger col-1" (click)="deleteFromOrder(item)"><i
+                  class="bi bi-x-circle"></i></button> -->
+                  <div class="col-2 d-flex align-items-center">
+                  <button class="btn btn-sm btn-outline-secondary" (click)="deleteFromOrder(item)">-</button>
+                  <span class="px-3">{{item.quantity}}</span>
+                  <button class="btn btn-sm btn-outline-secondary" (click)="addToOrder(item)">+</button>
+                </div>
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+
+
+
     </div>
-    
-
-
   </div>
-</div>
