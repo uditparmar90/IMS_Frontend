@@ -25,9 +25,9 @@
 
 /* Active link */
 .nav-link.active {
-  color: #3e8bff !important;
-  background: rgba(62, 139, 255, 0.15);
-  box-shadow: inset 0 0 0 1px rgba(62, 139, 255, 0.35);
+  color: #fcfdfd !important;
+  background: rgba(67, 124, 209, 0.205);
+  box-shadow: inset 0 0 0 1px rgb(41, 108, 209);
 }
 
 /* Page spacing below fixed navbar */

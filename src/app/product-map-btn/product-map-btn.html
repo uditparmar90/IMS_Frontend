@@ -1,20 +1,19 @@
 <div class="container-fluid vh-100 bg-light">
   <div class="row h-100">
     <div class="col-md-8 d-flex flex-column p-3">
-      <ul class="nav nav-pills mb-3 bg-white p-2 rounded shadow-sm">
-        <li class="nav-item" >
-          <button class="nav-link" [class.active]="selectedCategory() == 0" id="0" (click)="categoryFilter($event)"> All Items</button>
-        </li>
 
+      <ul class="nav nav-pills mb-3 bg-white p-2 rounded shadow-sm">
+        <li class="nav-item">
+          <button class="nav-link" [class.text-white]="selectedCategory() == 0" [class.active]="selectedCategory() == 0" id="0" (click)="categoryFilter($event)"> All
+            Items</button>
+        </li>
         @for( cat of productCategoryList(); track cat.id){
         <li class="nav-item">
-          <button class="nav-link" [class.active]="selectedCategory() == cat.id" href="#" id="{{cat.id}}" (click)="categoryFilter($event)">{{cat.name}}</button>
+          <button class="nav-link" [class.text-white]="selectedCategory() == cat.id" [class.active]="selectedCategory() == cat.id"  href="#" id="{{cat.id}}"
+            (click)="categoryFilter($event)">{{cat.name}}</button>
         </li>
         }
       </ul>
-
-
-      
 
       <div class="row row-cols-2 row-cols-lg-4 g-3 overflow-auto" style="max-height: 85vh;">
         @if(selectedCategory() > 0){
@@ -38,10 +37,10 @@
           </div>
         </div>
         }@empty {
-        <p>No products found in this category.</p>
+        <div class="d-flex justify-content-center w-100">
+          <p>No products found in this category.</p>
+        </div>
         }
-
-
         }
         @else{
 
@@ -65,28 +64,20 @@
           </div>
         </div>
         }@empty {
-        <p>No products found in this category.</p>
+        <div class="d-flex justify-content-center w-100">
+          <p>No products found in this category.</p>
+        </div>
         }
         }
       </div>
     </div>
 
-    <div class="col-md-4 bg-white border-start d-flex flex-column p-0 mb-0" style="justify-content: space-between;">
+    <div class="col-md-4 bg-white border-start d-flex flex-column p-0 mb-0">
       <div class="p-3 border-bottom bg-dark text-white">
         <h5 class="mb-0">Current Order</h5>
       </div>
-      <div class="p-3 border-top bg-light">
-        <div class="d-flex justify-content-between h4">
-          <span>Total</span>
-          <span class="text-primary font-weight-bold">${{totalamount()}}</span>
-        </div>
-        <div class="d-flex justify-content-between ">
-          <button class="btn  w-20 btn-lg mt-2 py-3 shadow" (click)="cancelAll()">Cencel </button>
-          <button class="btn btn-primary w-70 btn-lg mt-2 py-3 shadow">Checkout</button>
-        </div>
-      </div>
 
-      <div class="overflow-auto" style="max-height: 70vh; height: 70vh;">
+      <div class="overflow-auto" style="max-height: 60vh; height: 60vh;">
         <div class="container">
           <div class="row">
             <div class="col-12 col-12 d-flex align-items-center py-2 border-bottom font-weight-bold">
@@ -111,6 +102,17 @@
             </div>
             }
           </div>
+        </div>
+      </div>
+
+      <div class="p-3 border-top bg-light">
+        <div class="d-flex justify-content-between h4">
+          <span>Total</span>
+          <span class="text-primary font-weight-bold">${{totalamount()}}</span>
+        </div>
+        <div class="d-flex justify-content-between ">
+          <button class="btn w-20  mt-2 py-3 shadow" (click)="cancelAll()">Cencel </button>
+          <button class="btn btn-primary w-70 mt-2 py-3 shadow">Checkout</button>
         </div>
       </div>
 
