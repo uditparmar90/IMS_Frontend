@@ -29,7 +29,7 @@
 
           <div class="col-md-6">
             <label class="form-label">Category<span class="text-danger">*</span></label>
-            <select class="form-select custom-form-control" formControlName="Category_id" id="categorySelect">
+            <select class="form-select custom-form-control" formControlName="Category_id" id="Category_id">
               <option value="0">select Category</option>
               <option value="1">Electronics</option>
               <option value="2">Furniture</option>
@@ -38,7 +38,7 @@
           </div>
 
           <div class="col-md-6">
-            <input type="checkbox" formControlName="IsActive"> <label class="form-label">Active</label>
+            <input type="checkbox" formControlName="isActive"> <label class="form-label">Active</label>
           </div>
 
           <div class="col-12">  
@@ -63,8 +63,10 @@
             <input type="number" class="form-control custom-form-control" formControlName="price">
           </div>
 
+          
+
           <div class="mb-3">
-            <label class="form-label">Opening Stock<span class="text-danger">*</span></label>
+            <label class="form-label">Quantity<span class="text-danger">*</span></label>
             <input type="number" class="form-control custom-form-control" formControlName="quantity">
           </div>
 

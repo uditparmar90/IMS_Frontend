@@ -14,8 +14,8 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent  {
   autoUsername: string | null = null;
   autoPassword: string | null = null;
-isLoading: any;
-errorMessage: any;
+isLoading: true | false = false;
+errorMessage:true | false = false;
 constructor() {
   afterNextRender(() => {
     this.autoUsername = window.localStorage.getItem('IMSUsername');
@@ -53,6 +53,7 @@ constructor() {
 
   onSubmit() {
     if (this.loginForm.valid) {
+      this.isLoading = true;
       const credentials = this.loginForm.value;
       localStorage.setItem('IMSUsername', credentials.email || '');
       localStorage.setItem('IMSPassword', credentials.password || '');

@@ -27,20 +27,31 @@ export class AddProductComponent implements OnInit {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       sku: [''],
-      Category_id: ['', Validators.required],
-      IsActive: [true, Validators.required  ],
+      Category_id: [0, Validators.required],
+      isActive: [true, Validators.required  ],
       description: [''],
       price: [0, [Validators.required, Validators.min(1)]],
       quantity: [0, Validators.required],
       Reorder_level: [0, Validators.required],
     });
 
-    if (product) {
-      this.isEditMode = true;
-      this.productId = product.id; // assumes backend sends id
-      this.productForm.patchValue(product);
-      console.log('Editing product:', product);
-    }
+if (product) {
+  this.isEditMode = true;
+  this.productId = product.id;
+
+  this.productForm.patchValue({
+    name: product.name,
+    sku: product.sku,
+    description: product.description,
+    price: product.price,
+    quantity: product.quantity,
+    // Manually map mismatched keys:
+    Category_id: product.category_id?.toString(), // Match 'C' and convert to string for <select>
+    isActive: product.isActive,                   // Match 'I'
+    Reorder_level: product.reorder_level          // Match spelling 'level' vs 'lavel'
+  });
+}
+
   }
 
   submitProduct() {
