@@ -31,6 +31,7 @@ export class AddProductComponent implements OnInit {
       isActive: [true, Validators.required  ],
       description: [''],
       price: [0, [Validators.required, Validators.min(1)]],
+      Original_Cost:[0,[Validators.required, Validators.min(1)]],
       quantity: [0, Validators.required],
       Reorder_level: [0, Validators.required],
     });
@@ -44,6 +45,7 @@ if (product) {
     sku: product.sku,
     description: product.description,
     price: product.price,
+    Original_Cost: product.original_Cost,
     quantity: product.quantity,
     // Manually map mismatched keys:
     Category_id: product.category_id?.toString(), // Match 'C' and convert to string for <select>
