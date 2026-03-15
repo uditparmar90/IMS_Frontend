@@ -39,7 +39,7 @@ export class ProductMapBtn implements OnInit {
         const uniqueCategoryIds = Array.from(new Set(categoryid));
         this.productCategory.set(uniqueCategoryIds);
         
-        this.httpClient.get<any>('api/Category/GetCategory').subscribe(category=>{
+        this.httpClient.get<any>('/api/Category/GetCategory').subscribe(category=>{
           this.productCategoryList.set(category);
           console.log('productCategoryList : ' + this.productCategoryList());
         })
@@ -61,7 +61,6 @@ export class ProductMapBtn implements OnInit {
       this.ProductCategoryObj.set(this.ProdList());
       return;
     }
-
     this.ProductCategoryObj.set(this.ProdList().filter(prod=>prod.category_id==categoryId))
   }
 
@@ -79,6 +78,17 @@ export class ProductMapBtn implements OnInit {
     else {
       this.cartProd.set([...this.cartProd(), { id: product.id, name: product.name, price: product.price, quantity: 1 }]);
     }
+  }
+
+   checkout() {
+    let check=this.cartProd()
+    console.log('Checkout clicked'+check);
+    this.httpClient.post<any>('/api/Transactions/Insert', check).subscribe(response => {
+      console.log('Transaction successful:', response);
+      this.cancelAll();
+    });
+
+    
   }
 
 
