@@ -49,11 +49,14 @@
           formControlName="confirmPassword"
         />
       </div>
+      <div class="alert alert-danger" *ngIf="errorMsg">
+        {{ errorMsg }}
+      </div>
 
       <button
         class="btn btn-primary w-100"
         [disabled]="signupForm.invalid"
-      >
+        (click)="submit()">
         <i class="bi bi-person-plus me-1"></i>
         Create Account
       </button>
