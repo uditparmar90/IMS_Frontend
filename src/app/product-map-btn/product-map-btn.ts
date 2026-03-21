@@ -30,23 +30,49 @@ export class ProductMapBtn implements OnInit {
   
 
 
-  ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.httpClient.get<any>('/api/Product/GetAllProducts').subscribe(data => {
-        this.ProdList.set(data);
+  // ngOnInit() {
+  //   if (isPlatformBrowser(this.platformId)) {
+  //     this.httpClient.get<any>('/api/Product/GetAllProducts').subscribe(data => {
+  //       this.ProdList.set(data);
         
-        const categoryid:number[]=data.map((prod:any)=>prod.category_id);
-        const uniqueCategoryIds = Array.from(new Set(categoryid));
-        this.productCategory.set(uniqueCategoryIds);
+  //       const categoryid:number[]=data.map((prod:any)=>prod.category_id);
+  //       const uniqueCategoryIds = Array.from(new Set(categoryid));
+  //       this.productCategory.set(uniqueCategoryIds);
         
-        this.httpClient.get<any>('/api/Category/GetCategory').subscribe(category=>{
-          this.productCategoryList.set(category);
-          console.log('productCategoryList : ' + this.productCategoryList());
-        })
+  //       this.httpClient.get<any>('/api/Category/GetCategory').subscribe(category=>{
+  //         this.productCategoryList.set(category);
+  //         console.log('productCategoryList : ' + this.productCategoryList());
+  //       })
 
+  //     });
+  //   }
+  // }
+  ngOnInit() {
+  if (isPlatformBrowser(this.platformId)) {
+    this.httpClient.get<any[]>('/api/Product/GetAllProducts').subscribe(data => {
+      
+      // 1. Filter products with quantity > 0
+      const availableProducts = data.filter(prod => prod.quantity > 0);
+      this.ProdList.set(availableProducts);
+
+      // 2. Extract unique category IDs
+      const categoryIds = availableProducts.map(prod => prod.category_id);
+      const uniqueCategoryIds = Array.from(new Set(categoryIds));
+      this.productCategory.set(uniqueCategoryIds);
+
+      // 3. Fetch Categories
+      this.httpClient.get<any[]>('/api/Category/GetCategory').subscribe(categories => {
+        // Optional: Filter category list to only include categories present in your products
+        const filteredCategories = categories.filter(cat => 
+          uniqueCategoryIds.includes(cat.id)
+        );
+        
+        this.productCategoryList.set(filteredCategories);
+        console.log('productCategoryList updated:', this.productCategoryList());
       });
-    }
+    });
   }
+}
     ngOnChanges() {
     console.log('ProdList : ' + this.ProdList());
     console.log('productCategory : ' + this.productCategory());
@@ -80,8 +106,8 @@ export class ProductMapBtn implements OnInit {
     }
   }
 
-   checkout() {
-    let check=this.cartProd()
+  checkout() {
+    let check=this.cartProd();
     console.log('Checkout clicked'+check);
     this.httpClient.post<any>('/api/Transactions/Insert', check).subscribe(response => {
       console.log('Transaction successful:', response);
@@ -90,8 +116,6 @@ export class ProductMapBtn implements OnInit {
 
     
   }
-
-
 
   deleteFromOrder(product: any) {
     let currentCart = this.cartProd();
