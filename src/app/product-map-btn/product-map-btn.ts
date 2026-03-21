@@ -19,6 +19,7 @@ export class ProductMapBtn implements OnInit {
 
   platformId = inject(PLATFORM_ID);
   private httpClient = inject(HttpClient);
+  // recevied Product by API
   ProdList = signal<any[]>([]);
   cartProd = signal<CartProdTDO[]>([]);
   totalamount = signal(0);
@@ -73,7 +74,8 @@ export class ProductMapBtn implements OnInit {
     });
   }
 }
-    ngOnChanges() {
+
+  ngOnChanges() {
     console.log('ProdList : ' + this.ProdList());
     console.log('productCategory : ' + this.productCategory());
   }
@@ -92,17 +94,27 @@ export class ProductMapBtn implements OnInit {
 
 
   addToOrder(product: any) {
-    this.totalamount.set(this.totalamount() + product.price);
+    
 
     //console.log('Total Amount: ' + this.totalamount());
-    let currentCart = this.cartProd();
+    let currentCart: CartProdTDO[] = this.cartProd();
     let existingItem = currentCart.find((data: { id: any; }) => data.id === product.id);
     if (existingItem) {
       // this.cartProd.set([...this.cartProd(),existingItem?existingItem:{id:product.id,name:product.name,price:product.price,quantity:1}]);
-      this.cartProd.update(cart => cart.map(data2 => data2.id == product.id ? { ...data2, quantity: data2.quantity + 1 } : data2));
+      if(product.quantity >= (currentCart.find((data: { id: any; }) => data.id === product.id)?.quantity || 0) + 1){
+        this.cartProd.update(cart => cart.map(data2 => data2.id == product.id ? { ...data2, quantity: data2.quantity + 1 } : data2));
+        this.totalamount.set(this.totalamount() + product.price);
+      }
+      else{
+        alert('No more quantity available for this product');
+
+      }
+
+      
     }
     else {
       this.cartProd.set([...this.cartProd(), { id: product.id, name: product.name, price: product.price, quantity: 1 }]);
+      this.totalamount.set(this.totalamount() + product.price);
     }
   }
 
