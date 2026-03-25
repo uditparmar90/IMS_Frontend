@@ -82,8 +82,8 @@ export class ProductMapBtn implements OnInit {
   
 
 
-  categoryFilter(e:any){
-    const categoryId = Number(e.target.id);
+  categoryFilter(e:Event){
+    const categoryId = Number((e.target as HTMLElement).id);
     this.selectedCategory.set(categoryId);
     if(categoryId==0){
       this.ProductCategoryObj.set(this.ProdList());
