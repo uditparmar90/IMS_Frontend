@@ -24,7 +24,7 @@ export class ProductMapBtn implements OnInit {
   cartProd = signal<CartProdTDO[]>([]);
   totalamount = signal(0);
   ProductCounter = signal(0);
-  productCategory = signal<number[]>([]);
+  productCategoryIds = signal<number[]>([]);
   productCategoryList = signal<any[]>([]);
   ProductCategoryObj=signal<any[]>([]);
   selectedCategory=signal(0);
@@ -38,7 +38,7 @@ export class ProductMapBtn implements OnInit {
         
   //       const categoryid:number[]=data.map((prod:any)=>prod.category_id);
   //       const uniqueCategoryIds = Array.from(new Set(categoryid));
-  //       this.productCategory.set(uniqueCategoryIds);
+  //       this.productCategoryIds.set(uniqueCategoryIds);
         
   //       this.httpClient.get<any>('/api/Category/GetCategory').subscribe(category=>{
   //         this.productCategoryList.set(category);
@@ -59,17 +59,19 @@ export class ProductMapBtn implements OnInit {
       // 2. Extract unique category IDs
       const categoryIds = availableProducts.map(prod => prod.category_id);
       const uniqueCategoryIds = Array.from(new Set(categoryIds));
-      this.productCategory.set(uniqueCategoryIds);
+      this.productCategoryIds.set(uniqueCategoryIds);
 
       // 3. Fetch Categories
       this.httpClient.get<any[]>('/api/Category/GetCategory').subscribe(categories => {
         // Optional: Filter category list to only include categories present in your products
-        const filteredCategories = categories.filter(cat => 
+        const categoryIds:number[]= categories.filter(cat => 
           uniqueCategoryIds.includes(cat.id)
         );
         
-        this.productCategoryList.set(filteredCategories);
+        this.productCategoryList.set(categoryIds);
+        console.log('Categories fetched:', categories);
         console.log('productCategoryList updated:', this.productCategoryList());
+        console.log('productCategoryIds updated:', this.productCategoryIds());
       });
     });
   }
@@ -77,7 +79,7 @@ export class ProductMapBtn implements OnInit {
 
   ngOnChanges() {
     console.log('ProdList : ' + this.ProdList());
-    console.log('productCategory : ' + this.productCategory());
+    console.log('productCategoryIds : ' + this.productCategoryIds());
   }
   
 
@@ -140,6 +142,8 @@ export class ProductMapBtn implements OnInit {
       this.totalamount.set(this.totalamount() - existingItem.price);
     }
   }
+
+  
 
 
 

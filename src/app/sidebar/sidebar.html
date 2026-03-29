@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark ims-navbar fixed-top">
+<nav class="navbar navbar-expand-lg  ims-navbar fixed-top">
   <div class="container-fluid">
 
     <!-- Brand -->
@@ -56,6 +56,7 @@
       <!-- Right Side -->
 
       <div class="d-flex align-items-center" [style]="islogin ? 'display: block;' : 'display: none;'">
+          <span class="me-3"><i class="bi bi-brightness-high" id="DarkThemeToggle" (click)="applyTheme()"></i></span>
         <button class="btn btn-outline-danger btn-sm" (click)="logout()">
           <i class="bi bi-box-arrow-right me-1"></i> Logout
         </button>

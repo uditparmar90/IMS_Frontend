@@ -1,3 +1,18 @@
+/* *{
+    background: #000;
+    color: whitesmoke;
+}
+body{
+    background: #000;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+} */
+
+
 .ims-navbar {
   background: rgba(16, 164, 201, 0.822);
   backdrop-filter: blur(10px);
@@ -11,7 +26,7 @@
 
 /* Nav links */
 .nav-link {
-  color: rgba(255, 255, 255, 0.75) !important;
+  /* color: rgba(255, 255, 255, 0.75) !important; */
   font-weight: 500;
   border-radius: 8px;
   padding: 8px 14px;
@@ -19,13 +34,13 @@
 }
 
 .nav-link:hover {
-  color: #fff !important;
+  /* color: #fff !important; */
   background: rgba(255, 255, 255, 0.08);
 }
 
 /* Active link */
 .nav-link.active {
-  color: #fcfdfd !important;
+  /* color: #fcfdfd !important; */
   background: rgba(67, 124, 209, 0.205);
   box-shadow: inset 0 0 0 1px rgb(41, 108, 209);
 }
@@ -33,4 +48,26 @@
 /* Page spacing below fixed navbar */
 .page-content {
   padding-top: 80px;
+}
+
+
+
+:root {
+  --text-color: #000;
+  --background-color: #fff;
+  --nav-bg: rgba(16, 164, 201, 0.822);
+}
+.dark-theme {
+  --text-color: whitesmoke;
+  --background-color: #121212;
+  --nav-bg: #1f1f1f;
+}
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.ims-navbar {
+  background: var(--nav-bg);
+  color: var(--background-color);
 }

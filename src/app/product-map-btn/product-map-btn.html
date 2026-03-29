@@ -1,10 +1,10 @@
-<div class="container-fluid vh-100 bg-light">
+<div class="container-fluid vh-100 ">
   <div class="row h-100">
 
     <!-- product button section -->
     <div class="col-md-8 d-flex flex-column p-3">
 
-      <ul class="nav nav-pills mb-3 bg-white p-2 rounded shadow-sm">
+      <ul class="nav nav-pills mb-3  p-2 rounded shadow-sm">
         <li class="nav-item">
           <button class="nav-link" [class.text-white]="selectedCategory() == 0" [class.active]="selectedCategory() == 0" id="0" (click)="categoryFilter($event)"> All
             Items</button>
@@ -21,13 +21,24 @@
         @if(selectedCategory() > 0){
         @for (product of ProductCategoryObj(); track product.id){
         <div class="col">
-          <button class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0" (click)="addToOrder(product)">
-            <img src="Images/ProductDummy.jpg" class="card-img-top" alt="Product">
+          <div class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0" >
+            <img src="Images/ProductDummy.jpg" class="card-img-top d-flex align-items-stretch h-auto" alt="Product" >
             <div class="card-body p-2 text-center">
-              <h6 class="card-title mb-1 text-dark">{{product.name}}</h6>
-              <span class="badge bg-success text-white">${{product.price}}</span>
+              <h6 class="card-title mb-1 ">{{product.name}}</h6>
+
+              <div class="counter-container w-auto" style="display: flex; align-items: end; justify-content: space-between;">
+                <span class="badge bg-success " style="height: fit-content;">${{product.price}}</span>
+                <div class="d-flex align-items-center w-auto bg-danger px-2 py-1" style="height: fit-content; border-radius: 4px;">
+                  <button class="btn btn-sm "(click)="deleteFromOrder(product)">-</button>
+                  <div class="value-display">
+                    <span class="count-text">0</span>
+                  </div>
+                  <button class="btn btn-sm"(click)="addToOrder(product)">+</button>
+                </div>
+              </div>
+
             </div>
-          </button>
+          </div>
         </div>
         <div class="counter-container" style="display: none;">
           <div class="liquid-pill">
@@ -35,7 +46,7 @@
             <div class="value-display">
               <span class="count-text">{{ ProductCounter() }}</span>
             </div>
-            <button class="ctrl-btn plus">+</button>
+            <button class="ctrl-btn plus"(click)="addToOrder(product)">+</button>
           </div>
         </div>
         }@empty {
@@ -45,22 +56,20 @@
         }
       }
         @else{
-
+          <!-- show in all tab -->
         @for (product of ProdList(); track product.id){
         <div class="col">
-          <button class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0" >
-            <img src="Images/ProductDummy.jpg" class="card-img-top" alt="Product">
+          <div class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0" >
+            <img src="Images/ProductDummy.jpg" class="card-img-top d-flex align-items-stretch h-auto" alt="Product">
             <div class="card-body p-2 ">
-              <h6 class="card-title mb-1 text-dark text-center">{{product.name}}</h6>
+              <h6 class="card-title mb-1  text-center">{{product.name}}</h6>
               
 
 
-              <div class="counter-container w-auto" style="display: flex;
-    align-items: end;
-    justify-content: space-between;">
-                <span class="badge bg-success text-white" style="height: fit-content;">${{product.price}}</span>
-                <div class="d-flex align-items-center w-auto bg-danger text-white  px-2 py-1" style="height: fit-content; border-radius: 4px;">
-                  <button class="btn btn-sm ">-</button>
+              <div class="counter-container w-auto" style="display: flex; align-items: end; justify-content: space-between;">
+                <span class="badge bg-success  " style="height: fit-content;">${{product.price}}</span>
+                <div class="d-flex align-items-center w-auto bg-danger    px-2 py-1" style="height: fit-content; border-radius: 4px;">
+                  <button class="btn btn-sm "(click)="deleteFromOrder(product)">-</button>
                   <div class="value-display">
                     <span class="count-text">0</span>
                   </div>
@@ -68,7 +77,7 @@
                 </div>
               </div>
             </div>
-          </button>
+          </div>
         </div>
         
       }
@@ -84,8 +93,8 @@
 
     <!-- cart section -->
 
-    <div class="col-md-4 bg-white border-start d-flex flex-column p-0 mb-0">
-      <div class="p-3 border-bottom bg-dark text-white">
+    <div class="col-md-4 border-start d-flex flex-column p-0 mb-0">
+      <div class="p-3 border-bottom">
         <h5 class="mb-0">Current Order</h5>
       </div>
 
@@ -117,7 +126,7 @@
         </div>
       </div>
 
-      <div class="p-3 border-top bg-light">
+      <div class="p-3 border-top ">
         <div class="d-flex justify-content-between h4">
           <span>Total</span>
           <span class="text-primary font-weight-bold">${{totalamount()}}</span>

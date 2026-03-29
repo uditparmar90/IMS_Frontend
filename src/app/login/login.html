@@ -38,6 +38,9 @@
         </div>
         <a href="#" class="forgot-link">Forgot password?</a>
       </div>
+      <div [hidden]="!errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
 
       <button class="btn btn-primary w-100" type="submit">
         <i class="bi bi-box-arrow-in-right me-1"></i>
@@ -46,13 +49,11 @@
       <!-- <router-outlet> -->
       <a routerLink="/signUp" class="btn btn-link">Don't have an account? Sign Up</a>
       <!-- </router-outlet> -->
-      <div *ngIf="errorMessage" class="alert alert-danger mt-3">
-        {{ errorMessage }}
-      </div>
+      
     </form>
     <!-- <div class="spinner-border" role="status"> -->
     <!-- </div> -->
-    <div class="loading-overlay" *ngIf="isLoading">
+    <div class="loading-overlay" [hidden]="!isLoading">
       <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
       <span class="loading-text">Starting up...</span>
     </div>

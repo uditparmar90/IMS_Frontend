@@ -1,4 +1,4 @@
-import { afterNextRender, Component, inject, OnInit } from '@angular/core';
+import { afterNextRender, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLinkWithHref, Router } from '@angular/router';
@@ -14,8 +14,8 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent  {
   autoUsername: string | null = null;
   autoPassword: string | null = null;
-isLoading: true | false = false;
-errorMessage:true | false = false;
+isLoading: boolean = false;
+errorMessage: string = "";
 constructor() {
   afterNextRender(() => {
     this.autoUsername = window.localStorage.getItem('IMSUsername');
@@ -42,6 +42,7 @@ constructor() {
   private http = inject(HttpClient);
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private cd = inject(ChangeDetectorRef);
 
   // 2. API URL
   private apiUrl = '/api/Authorize/login';
@@ -72,8 +73,15 @@ constructor() {
           } 
         },
         error: (error) => {
-          console.error('Login failed', error);
+          this.isLoading = false; // ✅ BEST PLACE
+          this.errorMessage = "Please check email and password and try again.";
+          console.log('Login failed', error);
+          this.cd.detectChanges();
         },
+        complete: () => {
+    this.isLoading = false; // ✅ BEST PLACE
+    this.cd.detectChanges();
+  }
       });
     }
   }
