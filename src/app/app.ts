@@ -14,19 +14,19 @@ export class App {
 
 ngOnInit() {
   this.isDark = localStorage.getItem('theme') === 'dark';
-  this.applyTheme();
+  // this.applyTheme();
 }
 
-applyTheme() {
-  document.body.setAttribute(
-    'data-bs-theme',
-    this.isDark ? 'dark' : 'light'
-  );
-}
+// applyTheme() {
+//   document.body.setAttribute(
+//     'data-bs-theme',
+//     this.isDark ? 'dark' : 'light'
+//   );
+// }
 
-toggleTheme() {
-  this.isDark = !this.isDark;
-  localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
-  this.applyTheme();
-}
+// toggleTheme() {
+//   this.isDark = !this.isDark;
+//   localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
+//   this.applyTheme();
+// }
 }

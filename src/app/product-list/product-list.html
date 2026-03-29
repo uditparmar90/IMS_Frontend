@@ -1,7 +1,7 @@
 <div class="container-fluid mt-4">
   <div class="card shadow-sm border-0">
     
-    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+    <div class="card-header  py-3 d-flex justify-content-between align-items-center">
       <h4 class="m-0 text-primary fw-bold">
         <i class="bi bi-box-seam me-2"></i>Inventory List
       </h4>
@@ -16,25 +16,24 @@
         [paginator]="true" 
         [rows]="10" 
         [rowsPerPageOptions]="[5, 10, 20]"
-        [tableStyle]="{ 'min-width': '50rem' }"
-        styleClass="p-datatable-striped p-datatable-sm"
-        responsiveLayout="scroll">
+        [tableStyle]="{ 'min-width': '50rem','background': 'black','color':'whiteSmoke'}"
+        styleClass="p-datatable-striped p-datatable-sm">
 
-        <ng-template pTemplate="header">
+        <ng-template pTemplate="header" >
             <tr>
-                <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="sku">SKU <p-sortIcon field="sku"></p-sortIcon></th>
-                <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-                <th pSortableColumn="reorder_level">Reorder Level <p-sortIcon field="reorder_level"></p-sortIcon></th>
-                <th pSortableColumn="quantity" class="text-center">Available Qty <p-sortIcon field="quantity"></p-sortIcon></th>
-                <th class="text-center">Actions</th>
+                <th pSortableColumn="name" >Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="sku" >SKU <p-sortIcon field="sku"></p-sortIcon></th>
+                <th pSortableColumn="price" >Price <p-sortIcon field="price"></p-sortIcon></th>
+                <th pSortableColumn="reorder_level" >Reorder Level <p-sortIcon field="reorder_level"></p-sortIcon></th>
+                <th pSortableColumn="quantity" class="text-center" >Available Qty <p-sortIcon field="quantity"></p-sortIcon></th>
+                <th class="text-center" >Actions</th>
             </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-product>
-          <tr class="align-middle">
-            <td class="fw-bold text-dark">{{ product.name }}</td>
-            <td><span class="badge bg-light text-dark border">{{ product.sku }}</span></td>
+        <ng-template pTemplate="body" let-product >
+          <tr class="align-middle" >
+            <td class="fw-bold " >{{ product.name }}</td>
+            <td><span class="badge  border">{{ product.sku }}</span></td>
             <td class="text-success fw-bold">{{ product.price | currency:'USD' }}</td>
             <td>
               <span >

@@ -20,10 +20,22 @@ export class SidebarComponent {
 
 
   applyTheme() {
-  document.body.setAttribute(
+    const html = document.documentElement;
+    const isNgDark=html.classList.contains('dark');
+    document.body.setAttribute(
     'data-bs-theme',
     this.isDark ? 'dark' : 'light'
-  );
+    );
+    this.isDark=!this.isDark;
+
+    if (isNgDark) {
+    html.classList.remove('dark');
+    document.body.setAttribute('data-bs-theme', 'light');
+  } else {
+    html.classList.add('dark');
+    document.body.setAttribute('data-bs-theme', 'dark');
+  }
+    // this.toggleTheme(); 
 }
 
 toggleTheme() {
