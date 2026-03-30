@@ -10,10 +10,10 @@ import { SidebarComponent } from "./sidebar/sidebar";
 })
 export class App {
   protected readonly title = signal('IMS_Frontend');
-  isDark = false;
+  // isDark = false;
 
 ngOnInit() {
-  this.isDark = localStorage.getItem('theme') === 'dark';
+  // this.isDark = localStorage.getItem('theme') === 'dark';
   // this.applyTheme();
 }
 

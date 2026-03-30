@@ -9,70 +9,76 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './sidebar.css',
 })
 export class SidebarComponent {
-
   protected readonly title = signal('IMS_Frontend');
-  isDark = false;
+  IsDarkTheme: boolean = null!;
+  ngOnInit() {
+    if(typeof window !== 'undefined'  ) {
+      this.IsDarkTheme = localStorage.getItem('theme') === 'dark';
+    
+    if (this.IsDarkTheme) {
+      document.documentElement.classList.add('dark');
+      document.body.setAttribute('data-bs-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.body.setAttribute('data-bs-theme', 'light');
+      localStorage.setItem('theme', 'light');
+    }
+    }
+  }
 
   islogin: boolean = false;
   afternextRender() {
     this.islogin = localStorage.getItem('token') ? true : false;
   }
 
-
   applyTheme() {
     const html = document.documentElement;
-    const isNgDark=html.classList.contains('dark');
-    document.body.setAttribute(
-    'data-bs-theme',
-    this.isDark ? 'dark' : 'light'
-    );
-    this.isDark=!this.isDark;
+    const ThemeToggler: HTMLElement | null = document.getElementById('ThemeToggler');
 
-    if (isNgDark) {
-    html.classList.remove('dark');
-    document.body.setAttribute('data-bs-theme', 'light');
-  } else {
-    html.classList.add('dark');
-    document.body.setAttribute('data-bs-theme', 'dark');
+    if (this.IsDarkTheme) {
+      html.classList.contains("dark")? html.classList.remove('dark') : null;
+      document.body.setAttribute('data-bs-theme', 'light');
+
+      if (ThemeToggler) {
+        
+        ThemeToggler.classList.contains('bi-sun')? ThemeToggler.classList.remove('bi-sun') : null;
+        ThemeToggler.classList.add('bi-moon');
+      }
+
+      localStorage.setItem('theme', 'light');
+    } 
+    else {
+      html.classList.add('dark');
+      document.body.setAttribute('data-bs-theme', 'dark');
+
+      if (ThemeToggler) {
+        ThemeToggler.classList.contains("bi-moon")?ThemeToggler.classList.remove('bi-moon') : null;
+        ThemeToggler.classList.add('bi-sun');
+      }
+      typeof window !== 'undefined' && typeof localStorage !== 'undefined' && localStorage.setItem('theme', 'dark');
+    }
+    // this.toggleTheme();
   }
-    // this.toggleTheme(); 
-}
-
-toggleTheme() {
-  this.isDark = !this.isDark;
-  localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
-  this.applyTheme();
-}
-
 
   // toggleTheme() {
-  //   const body = document.body;
-  //   body.classList.toggle('dark-theme');
-  //   const div = document.querySelector('div');
-  //   const nav = document.querySelector('nav');
-    
-  //   if (div) {
-  //     div.classList.toggle('dark-theme');
-  //   }
-  //   if (nav) {
-  //     nav.classList.toggle('dark-theme');
-  //   }
-  //   const DarkThemeToggle = document.getElementById('DarkThemeToggle');
-  //   if (DarkThemeToggle) {
-  //     if(DarkThemeToggle.classList.contains('bi-brightness-high')){
-  //         DarkThemeToggle.classList.add('bi-moon');
-  //         DarkThemeToggle.classList.remove('bi-brightness-high');
-  //     }else{
-  //         DarkThemeToggle.classList.add('bi-brightness-high');
-  //         DarkThemeToggle.classList.remove('bi-moon');
-  //     }
-  //   }
-    
-
-  //   console.log('Theme toggled');
+  //   this.IsDarkTheme = !this.IsDarkTheme;
+  //   typeof window !== 'undefined' && typeof localStorage !== 'undefined' && localStorage.setItem('theme', this.IsDarkTheme ? 'dark' : 'light');
+  //   this.applyTheme();
   // }
-  
+  toggleTheme() {
+  this.IsDarkTheme = !this.IsDarkTheme;
 
+  if (this.IsDarkTheme) {
+    document.documentElement.classList.add('dark');
+    document.body.setAttribute('data-bs-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+    document.body.setAttribute('data-bs-theme', 'light');
+    localStorage.setItem('theme', 'light');
+  }
+}
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('IMSUsername');
