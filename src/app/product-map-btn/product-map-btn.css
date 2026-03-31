@@ -1,18 +1,19 @@
 /* Remove default button styles to make the Card clickable */
 .pos-product-btn {
-    transition: all 0.15s ease-in-out;
-    outline: none;
+    /* transition: all 0.15s ease-in-out; */
+    /* outline: none; */
 }
 
 /* Hover & Active Effects */
 .pos-product-btn:hover {
     transform: translateY(-3px);
+    transition: all 0.12s ease;
     box-shadow: 0 8px 15px rgba(0,0,0,0.1) !important;
 }
 
 .pos-product-btn:active {
-    transform: scale(0.96);
-    background-color: #e9ecef;
+    /* transform: scale(0.96);
+    background-color: #e9ecef; */
 }
 
 /* Ensure the image doesn't look distorted */

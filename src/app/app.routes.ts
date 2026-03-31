@@ -5,7 +5,8 @@ import { LoginComponent } from './login/login';
 import { ProductListComponent } from './product-list/product-list';
 import { AddCategory } from './add-category/add-category';
 import { AddSubCategory} from './add-sub-category/add-sub-category';
-import { ProductMapBtn } from './product-map-btn/product-map-btn';  
+import { ProductMapBtn } from './product-map-btn/product-map-btn'; 
+import { NotFound } from './not-found/not-found'; 
 
 export const routes: Routes = [
     {path:'',component:LoginComponent,pathMatch: 'full'},
@@ -15,6 +16,8 @@ export const routes: Routes = [
     {path:'manageCategories',component:AddCategory},
     {path:'manageSubCategories',component:AddSubCategory},
     {path:'ProductMapBtn',component:ProductMapBtn},
-    {path:'**',redirectTo:'',pathMatch:'full'}
+    // {path:'pageNotFound',component:NotFound},
+    // {path:'**',redirectTo:'pageNotFound',pathMatch:'full'}
+    { path:'**', component: NotFound }
 
 ];  

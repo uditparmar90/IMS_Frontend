@@ -11,7 +11,7 @@
         </li>
         @for( cat of productCategoryList(); track cat.id){
         <li class="nav-item">
-          <button class="nav-link" [class.text-white]="selectedCategory() == cat.id" [class.active]="selectedCategory() == cat.id"  href="#" id="{{cat.id}}"
+          <button class="nav-link text-primary" [class.text-white]="selectedCategory() == cat.id" [class.active]="selectedCategory() == cat.id"  href="#" id="{{cat.id}}"
             (click)="categoryFilter($event)">{{cat.name}}</button>
         </li>
         }

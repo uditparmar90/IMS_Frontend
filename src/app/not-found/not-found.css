@@ -1,0 +1,14 @@
+.not-found-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--bs-body-bg);
+    color: var(--bs-body-color);
+}
+
+.not-found-container h1 {
+    font-size: 6rem;
+    font-weight: bold;
+}
