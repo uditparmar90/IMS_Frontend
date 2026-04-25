@@ -76,6 +76,11 @@ constructor() {
           this.isLoading = false; // ✅ BEST PLACE
           this.errorMessage = "Please check email and password and try again.";
           console.log('Login failed', error);
+          if (error.status === 401) {
+            this.errorMessage = "Unauthorized: Invalid email or password.";
+          } else {
+            this.errorMessage = "Sorry we are experiencing technical difficulties. Please try again later.";
+          }
           this.cd.detectChanges();
         },
         complete: () => {
