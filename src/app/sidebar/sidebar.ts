@@ -58,14 +58,7 @@ export class SidebarComponent {
       }
       typeof window !== 'undefined' && typeof localStorage !== 'undefined' && localStorage.setItem('theme', 'dark');
     }
-    // this.toggleTheme();
   }
-
-  // toggleTheme() {
-  //   this.IsDarkTheme = !this.IsDarkTheme;
-  //   typeof window !== 'undefined' && typeof localStorage !== 'undefined' && localStorage.setItem('theme', this.IsDarkTheme ? 'dark' : 'light');
-  //   this.applyTheme();
-  // }
   toggleTheme() {
   this.IsDarkTheme = !this.IsDarkTheme;
 
@@ -83,6 +76,6 @@ export class SidebarComponent {
     localStorage.removeItem('token');
     localStorage.removeItem('IMSUsername');
     localStorage.removeItem('IMSPassword');
-    window.location.href = '/ProductLists';
+    window.location.href = '/';
   }
 }

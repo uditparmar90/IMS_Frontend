@@ -57,7 +57,7 @@
       }
         @else{
           <!-- show in all tab -->
-        @for (product of ProdList(); track product.id){
+        @for (product of stockedProducts(); track product.id){
         <div class="col">
           <div class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0" >
             <img src="Images/ProductDummy.jpg" class="card-img-top d-flex align-items-stretch h-auto" alt="Product">
@@ -71,7 +71,10 @@
                 <div class="d-flex align-items-center w-auto bg-danger    px-2 py-1" style="height: fit-content; border-radius: 4px;">
                   <button class="btn btn-sm "(click)="deleteFromOrder(product)">-</button>
                   <div class="value-display">
-                    <span class="count-text">0</span>
+                    <!-- <span class="count-text">{{userCartItems().find((item) => item.id == product.id)?.quantity || 0}}</span> -->
+                    <span class="count-text">
+                      {{ getProductQuantity(product.id) }}
+                    </span>
                   </div>
                   <button class="btn btn-sm"(click)="addToOrder(product)">+</button>
                 </div>
@@ -107,11 +110,11 @@
               <span class="col-2">Price</span>
               <span class="col-2">Qunat.</span>
             </div>
-            @for (item of cartProd(); track item.id){
+            @for (item of userCartItems(); track item.id){
             <div class="col-12 d-flex align-items-center py-2 border-bottom">
               <!-- <span class="col-2">{{item.quantity}}</span> -->
               <span class="col-1">
-                {{cartProd().indexOf(item) + 1}}
+                {{userCartItems().indexOf(item) + 1}}
               </span>
               <span class="col-6">{{item.name}}</span>
               <span class="col-2 text-primary font-weight-bold">${{item.price}}</span>
