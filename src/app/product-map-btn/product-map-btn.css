@@ -63,7 +63,19 @@
   display: grid;
   place-items: center;
 }
-
+.fade-in-alert{
+  animation: fadeDown 0.3s ease;
+}
+@keyframes fadeDown{
+  from{
+    opacity:0;
+    transform:translateY(-20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 .ctrl-btn:hover {
   background: rgba(255, 255, 255, 0.1);
   color: var(--accent-color);

@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { timer } from 'rxjs';
 export interface CartProdTDO {
     id: number;
     name: string;
@@ -26,8 +27,10 @@ export class ProductMapBtn implements OnInit {
     productCategoryList = signal<any[]>([]);
     ProductCategoryObj = signal<any[]>([]);
     selectedCategory = signal(0);
+    isShowAlert = signal(false);
 
     ngOnInit() {
+        this.isShowAlert.set(false);
         if (isPlatformBrowser(this.platformId)) {
             this.httpClient.get<any[]>('/api/Product/GetAllProducts').subscribe((data) => {
                 // 1. Filter products with quantity > 0
@@ -58,6 +61,13 @@ export class ProductMapBtn implements OnInit {
         console.log('productCategoryIds : ' + this.productCategoryIds());
     }
 
+    showAlert() {
+        
+
+        // this.isShowAlert.set(true);
+        this.isShowAlert.set(true);
+    }
+
     categoryFilter(e: Event) {
         const categoryId = Number((e.target as HTMLElement).id);
         this.selectedCategory.set(categoryId);
@@ -86,9 +96,25 @@ export class ProductMapBtn implements OnInit {
                     ),
                 );
                 this.totalamount.set(this.totalamount() + product.price);
+
+                // shows alert if the user tries to add more quantity than available in stock
+                if (this.getProductQuantity(product.id) >= product.quantity) {
+                    this.showAlert();
+                    timer(3000).subscribe(() => {
+                        this.isShowAlert.update(()=>false)
+
+                    })
+                }
+
+
+
             } else {
 
-                // alert('No more quantity available for this product');
+                alert('No more quantity available for this product');
+                this.showAlert();
+                timer(3000).subscribe(() => {
+                    this.isShowAlert.update(() => false);
+                });
             }
         } else {
             this.userCartItems.set([
