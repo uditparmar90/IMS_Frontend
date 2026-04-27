@@ -1,4 +1,12 @@
+
+
 <div class="container-fluid vh-100 ">
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
   <div class="row h-100">
 
     <!-- product button section -->
@@ -18,20 +26,21 @@
       </ul>
 
       <div class="row row-cols-2 row-cols-lg-4 g-3 overflow-auto" style="max-height: 85vh;">
+        <!-- when category is selected -->
         @if(selectedCategory() > 0){
         @for (product of ProductCategoryObj(); track product.id){
         <div class="col">
-          <div class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0" >
+          <div class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0" [class.sold-out]="product.quantity == getProductQuantity(product.id)">
             <img src="Images/ProductDummy.jpg" class="card-img-top d-flex align-items-stretch h-auto" alt="Product" >
             <div class="card-body p-2 text-center">
-              <h6 class="card-title mb-1 ">{{product.name}}</h6>
+              <h6 class="card-title mb-1 ">{{product.name}} {{product.quantity == getProductQuantity(product.id) ? '(Out of Stock)' : 'In Stock'}}</h6>
 
               <div class="counter-container w-auto" style="display: flex; align-items: end; justify-content: space-between;">
                 <span class="badge bg-success " style="height: fit-content;">${{product.price}}</span>
                 <div class="d-flex align-items-center w-auto bg-danger px-2 py-1" style="height: fit-content; border-radius: 4px;">
                   <button class="btn btn-sm "(click)="deleteFromOrder(product)">-</button>
                   <div class="value-display">
-                    <span class="count-text">0</span>
+                    <span class="count-text">{{ getProductQuantity(product.id) }}</span>
                   </div>
                   <button class="btn btn-sm"(click)="addToOrder(product)">+</button>
                 </div>
@@ -59,10 +68,10 @@
           <!-- show in all tab -->
         @for (product of stockedProducts(); track product.id){
         <div class="col">
-          <div class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0" >
+          <div class="card h-100 w-100 border-0 shadow-sm pos-product-btn p-0" [class.sold-out]="product.quantity == getProductQuantity(product.id)">
             <img src="Images/ProductDummy.jpg" class="card-img-top d-flex align-items-stretch h-auto" alt="Product">
             <div class="card-body p-2 ">
-              <h6 class="card-title mb-1  text-center">{{product.name}}</h6>
+              <h6 class="card-title mb-1  text-center">{{product.name}} {{product.quantity == getProductQuantity(product.id) ? '(Out of Stock)' : 'In Stock'}}</h6>
               
 
 

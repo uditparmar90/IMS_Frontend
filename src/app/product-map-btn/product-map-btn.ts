@@ -87,7 +87,8 @@ export class ProductMapBtn implements OnInit {
                 );
                 this.totalamount.set(this.totalamount() + product.price);
             } else {
-                alert('No more quantity available for this product');
+
+                // alert('No more quantity available for this product');
             }
         } else {
             this.userCartItems.set([
