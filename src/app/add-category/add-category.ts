@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; // For navigation after save
 
@@ -19,7 +20,7 @@ export class AddCategory implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    // private categoryService: CategoryService // Inject your service here
+    private http: HttpClient,
   ) { }
 
   ngOnInit(): void {
@@ -51,39 +52,27 @@ export class AddCategory implements OnInit {
    * Handle Form Submission
    */
   onCategorySubmit(): void {
-    // 1. Check if form is valid
     if (this.categoryForm.invalid) {
-      // Trigger all validation messages if user clicked submit without filling fields
       this.categoryForm.markAllAsTouched();
       return;
     }
 
-    // 2. Prepare Data
     const formData = this.categoryForm.value;
     this.isSubmitting = true;
 
     console.log('Submitting Payload:', formData);
 
-    // 3. Call API Service (Simulated)
-    /*
-    this.categoryService.createCategory(formData).subscribe({
-      next: (res) => {
-        // Success Toast/Notification here
-        this.router.navigate(['/categories']); // Redirect to list
+    this.http.post('/api/Category/Insert', formData).subscribe({
+      next: () => {
+        this.isSubmitting = false;
+        this.categoryForm.reset({ categoryName: '', description: '', isActive: true });
+        this.router.navigate(['/manageCategories']);
       },
       error: (err) => {
         this.isSubmitting = false;
-        // Error handling logic
+        console.error('Failed to create category', err);
       }
     });
-    */
-
-    // Remove this timeout when you add your actual API call
-    setTimeout(() => {
-      alert('Category Saved Successfully! (Check console for data)');
-      this.isSubmitting = false;
-      this.router.navigate(['/categories']); 
-    }, 1000);
   }
 
   /**
@@ -91,6 +80,6 @@ export class AddCategory implements OnInit {
    */
   onCancel(): void {
     this.categoryForm.reset();
-    this.router.navigate(['/categories']); // Navigate back to the list page
+    this.router.navigate(['/manageCategories']);
   }
 }

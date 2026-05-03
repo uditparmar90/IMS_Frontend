@@ -4,6 +4,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { tap } from 'rxjs/operators'; // 1. Import 'tap'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -15,21 +16,32 @@ export class ProductListComponent {
   private httpClient = inject(HttpClient);
   private router = inject(Router);
 
-  products = this.httpClient.get<any[]>('/api/Product/GetAllProducts')
-    .pipe(
-      tap(data => console.log('Data received:', data))
-    );
-    editProduct(product: any) {
-      // Implement edit functionality here
-      this.router.navigate(['/Product'], { state: { product: product } });
-      
-      console.log('Editing product:', product);
+  products: Observable<any[]> = this.loadProducts();
+
+  private loadProducts(): Observable<any[]> {
+    return this.httpClient.get<any[]>('/api/Product/GetAllProducts').pipe(tap((data) => console.log('Data received:', data)));
+  }
+
+  editProduct(product: any) {
+    this.router.navigate(['/Product'], { state: { product: product } });
+    console.log('Editing product:', product);
+  }
+
+  deleteProduct(product: any) {
+    if (!confirm(`Delete "${product.name}"?`)) {
+      return;
     }
-    deleteProduct(product: any) {
-      // Implement delete functionality here
-      console.log('Deleting product:', product);
-    }
-    addProduct(){
-      this.router.navigate(['/Product']);
-    }
+    this.httpClient.delete(`/api/Product/Delete/${product.id}`).subscribe({
+      next: () => {
+        this.products = this.loadProducts();
+      },
+      error: (err) => {
+        console.error('Failed to delete product', err);
+      },
+    });
+  }
+
+  addProduct() {
+    this.router.navigate(['/Product']);
+  }
 }
