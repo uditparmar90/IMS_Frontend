@@ -18,6 +18,12 @@
 
         <div class="card-body row g-3">
           <div class="col-md-6">
+            <label class="form-label">Product Image<span class="text-danger">*</span></label>
+            <input type="file" class="form-control custom-form-control" (change)="onImageSelected($event)" accept="image/*" id="PrdImg">
+          </div>
+
+
+          <div class="col-md-6">
             <label class="form-label">Product Name<span class="text-danger">*</span></label>
             <input type="text" class="form-control custom-form-control" formControlName="name">
           </div>
