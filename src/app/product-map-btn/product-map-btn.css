@@ -66,6 +66,12 @@
 .fade-in-alert{
   animation: fadeDown 0.3s ease;
 }
+.prod-img{
+      max-height: 200px;
+      min-height: 200px;
+}
+
+
 @keyframes fadeDown{
   from{
     opacity:0;

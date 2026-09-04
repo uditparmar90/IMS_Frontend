@@ -1,7 +1,6 @@
 import { HttpInterceptorFn } from "@angular/common/http";
-import { Injectable,PlatformRef,inject,PLATFORM_ID } from "@angular/core";
+import { inject,PLATFORM_ID } from "@angular/core";
 import { isPlatformBrowser } from "@angular/common";
-import { RedirectCommand } from "@angular/router";
 import { Router } from "@angular/router";
 export const authInterceptor:HttpInterceptorFn=(req:any, next:any) => {
     const platformId=inject(PLATFORM_ID);
