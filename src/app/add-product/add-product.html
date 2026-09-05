@@ -35,11 +35,11 @@
 
           <div class="col-md-6">
             <label class="form-label">Category<span class="text-danger">*</span></label>
-            <select class="form-select custom-form-control" formControlName="Category_id" id="Category_id">
-              <option value="0">select Category</option>
-              <option value="1">Electronics</option>
-              <option value="2">Furniture</option>
-              <option value="3">Grocery</option>
+            <select class="form-select custom-form-control" formControlName="Category_id" id="Category_id" placeholder="Search">
+              <option value="0">Select Category</option>
+              @for (item of categories; track $index) {
+                <option class="dropdown-item" [value]="item.id">{{ item.name }}</option>
+              }
             </select>
           </div>
 

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TableModule } from "primeng/table";
 
 @Component({
@@ -10,6 +11,7 @@ import { TableModule } from "primeng/table";
 })
 export class CategoryList  implements OnInit {
     protected http = inject(HttpClient); 
+    protected router = inject(Router);
     categories: { id: number; name: string }[] = [];
     ngOnInit() {
         type category={
@@ -33,6 +35,7 @@ export class CategoryList  implements OnInit {
         // Implementation for deleting a category
     }
     addCategory(){
-        
+        this.router.navigate(['/categories']);
+
     }
 }

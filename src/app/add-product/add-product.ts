@@ -21,10 +21,22 @@ export class AddProductComponent implements OnInit {
   productForm!: FormGroup;
   isEditMode = false;
   productId: number | null = null;
+  categories: { id: number; name: string }[] = [];
 
   private platformId = inject(PLATFORM_ID);
 
   ngOnInit() {
+    this.http.get<{id:number;name:string}[]>("api/Category/GetCategory").subscribe({
+      next: (data) => {
+        console.log('Data received:', data);
+        this.categories = data;
+      },
+      error:(err)=>{
+        console.error('Error fetching categories:', err);
+      }
+
+    });
+
     let product = null;
     if (isPlatformBrowser(this.platformId)) {
       console.log("platformId : " + this.platformId);
@@ -78,36 +90,6 @@ export class AddProductComponent implements OnInit {
     }
   }
 
-  // submitProduct() {
-  //   if (!this.productForm.valid) return;
-
-  //   const payload = this.productForm.value;
-  //   console.log('Submitting product:', payload);
-
-  //   if (this.isEditMode && this.productId) {
-  //     this.http.put(
-  //       `/api/Product/Update/${this.productId}`,
-  //       payload
-  //     ).subscribe({
-  //       next: res => console.log('Product updated', res),
-  //       error: err => console.error(err)
-  //     });
-  //   } else {
-  //     this.http.post(
-  //       '/api/Product/Insert',
-  //       payload
-  //     ).subscribe({
-  //       next: res => {
-  //         console.log('Product added', res);
-  //         if (res !== "Product added successfully")
-  //           // this.productForm.reset();
-  //           this.router.navigate(['/ProductList']);
-
-  //       },
-  //       error: err => console.error(err)
-  //     });
-  //   }
-  // }
 
   submitProduct() {
   if (!this.productForm.valid) return;
