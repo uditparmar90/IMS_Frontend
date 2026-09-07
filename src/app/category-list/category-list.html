@@ -30,33 +30,21 @@
             </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-product >
+        <ng-template pTemplate="body" let-category >
           <tr class="align-middle" >
-            <td class="fw-bold " >{{ product.name }}</td>
-            <td><span class="badge bg-secondary text-white">{{ product.id }}</span></td>
-            <!-- <td class="text-success fw-bold">{{ product.price | currency:'USD' }}</td>
-            <td>
-              <span >
-                {{ product.reorder_level }} units
-              </span>
-            </td>
-            <td class="text-center">
-              <span [ngClass]="{'text-danger fw-bold': product.reorder_level >= product.quantity, 'text-muted': product.reorder_level > product.quantity}">
-                {{ product.quantity }} units
-              </span>
-            </td> -->
-
+            <td class="fw-bold " >{{ category.name }}</td>
+            <td><span class="badge bg-secondary text-white">{{ category.id }}</span></td>
             <td class="text-center">
               <div class="btn-group" role="group">
                 <button 
                     class="btn btn-outline-primary btn-sm rounded-start" 
-                    (click)="editProduct(product)" 
+                    (click)="editProduct(category)" 
                     title="Edit">
                     <i class="bi bi-pencil-square"></i>
                 </button>
                 <button 
                     class="btn btn-outline-danger btn-sm rounded-end" 
-                    (click)="deleteProduct(product)" 
+                    (click)="deleteProduct(category)" 
                     title="Delete">
                     <i class="bi bi-trash"></i>
                 </button>

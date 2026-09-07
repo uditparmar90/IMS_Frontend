@@ -18,7 +18,7 @@ export class CategoryList  implements OnInit {
             id: number;
             name: string;
         }
-        this.http.get<category[]>("/api/Category/GetCategory").subscribe({
+        this.http.get<category[]>("/api/Category/GetAllCategories").subscribe({
             next: (data: category[]) => {
                 console.log('Data received:', data);
                 this.categories = data;
@@ -29,10 +29,22 @@ export class CategoryList  implements OnInit {
         });
     }
     editProduct(category: { id: number; name: string }) {
+        console.log('Editing category:', category);
+        this.router.navigate(['/categories', category.id]);
         // Implementation for editing a category
-    }   
+    }
     deleteProduct(category: { id: number; name: string }) {
-        // Implementation for deleting a category
+        console.log('Deleting category:', category);
+        this.http.delete(`/api/Category/Delete/${category.id}`).subscribe({
+            next: () => {
+                console.log('Category deleted successfully');
+                // Remove the deleted category from the list
+                this.categories = this.categories.filter(c => c.id !== category.id);
+            },
+            error: (err) => {
+                console.error('Failed to delete category', err);
+            }
+        });
     }
     addCategory(){
         this.router.navigate(['/categories']);
