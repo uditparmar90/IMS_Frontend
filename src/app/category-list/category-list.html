@@ -1,68 +1,47 @@
 <div class="container-fluid mt-4">
   <div class="card shadow-sm border-0">
-    
-    <div class="card-header  py-3 d-flex justify-content-between align-items-center">
+
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
       <h4 class="m-0 text-primary fw-bold">
-        <i class="bi bi-box-seam me-2"></i>Category List
+        <i class="bi bi-box-seam me-2"></i>
+        Category List
       </h4>
-      <button class="btn btn-primary rounded-pill px-4 shadow-sm" (click)="addCategory()">
-        <i class="bi bi-plus-circle me-2"></i>Add Category
+
+      <button
+        class="btn btn-primary rounded-pill px-4 shadow-sm"
+        (click)="addCategory()">
+        <i class="bi bi-plus-circle me-2"></i>
+        Add Category
       </button>
     </div>
 
     <div class="card-body p-0">
-        <p-table 
-        [value]="(categories) || []" 
+
+      <p-table
+        [value]="(categories | async) || []" 
         [paginator]="true" 
         [rows]="10" 
         [rowsPerPageOptions]="[5, 10, 20]"
-        [tableStyle]="{ 'min-width': '50rem','background': 'black','color':'whiteSmoke'}"
-        styleClass="p-datatable-striped p-datatable-sm">
+        [tableStyle]="{ 'min-width': '50rem','background': 'black','color':'whiteSmoke'}">
 
-        <ng-template pTemplate="header" >
-            <tr>
-                <th pSortableColumn="name" >Name <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="id" >ID <p-sortIcon field="id"></p-sortIcon></th>
-                <!-- <th pSortableColumn="price" >Price <p-sortIcon field="price"></p-sortIcon></th>
-                <th pSortableColumn="reorder_level" >Reorder Level <p-sortIcon field="reorder_level"></p-sortIcon></th>
-                <th pSortableColumn="quantity" class="text-center" >Available Qty <p-sortIcon field="quantity"></p-sortIcon></th> -->
-                <th class="text-center" >Actions</th>
-            </tr>
-        </ng-template>
-
-        <ng-template pTemplate="body" let-category >
-          <tr class="align-middle" >
-            <td class="fw-bold " >{{ category.name }}</td>
-            <td><span class="badge bg-secondary text-white">{{ category.id }}</span></td>
-            <td class="text-center">
-              <div class="btn-group" role="group">
-                <button 
-                    class="btn btn-outline-primary btn-sm rounded-start" 
-                    (click)="editProduct(category)" 
-                    title="Edit">
-                    <i class="bi bi-pencil-square"></i>
-                </button>
-                <button 
-                    class="btn btn-outline-danger btn-sm rounded-end" 
-                    (click)="deleteProduct(category)" 
-                    title="Delete">
-                    <i class="bi bi-trash"></i>
-                </button>
-              </div>
-            </td>
+        <!-- HEADER -->
+        <ng-template #header>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
           </tr>
         </ng-template>
 
-        <ng-template pTemplate="emptymessage">
-            <tr>
-                <td colspan="6" class="text-center py-4 text-muted">
-                    <i class="bi bi-inbox fs-1 d-block mb-2"></i>
-                    No categories found. Click "Add Category" to begin.
-                </td>
-            </tr>
+        <!-- BODY -->
+        <ng-template #body let-category>
+          <tr>
+            <td>{{ category.id }}</td>
+            <td>{{ category.name }}</td>
+          </tr>
         </ng-template>
 
       </p-table>
+
     </div>
   </div>
 </div>
