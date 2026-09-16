@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { AsyncPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject, OnInit,OnChanges} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TableModule } from "primeng/table";
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -12,41 +12,47 @@ import { tap } from 'rxjs/operators';
     styleUrl: './category-list.css',
     imports: [TableModule, AsyncPipe],
 })
-export class CategoryList  implements OnInit {
+export class CategoryList implements OnInit {
     protected http = inject(HttpClient); 
     protected router = inject(Router);
+    protected route = inject(ActivatedRoute);
     categories: Observable<any[]> = this.loadProducts();
+    
     ngOnInit() {
         console.log('ngOnInit called');
         type category={
             id: number;
             name: string;
         }
+        this.route.queryParams.subscribe(params => {
+            const categoryId = params['categoryId'];
+            console.log('Query parameter categoryId:', categoryId);
+        });
         console.log('Fetching categories from API...');
         
     }
+    OnChanges() {
+        console.log('OnChanges called');
+        this.categories = this.loadProducts();
+    }
+
     private loadProducts(): Observable<any[]> {
     return this.http.get<any[]>('/api/Category/GetAllCategories').pipe(tap((data) => console.log('Data received:', data)));
   }
-    editProduct(category: { id: number; name: string }) {
-        console.log('Editing category:', category);
-        this.router.navigate(['/categories', category.id]);
+    editProduct(categoryId: number) {
+        console.log('Editing category:', categoryId);
+        this.router.navigate(['/app-add-category', categoryId]);
         // Implementation for editing a category
     }
-    // deleteProduct(category: { id: number; name: string }) {
-    //     console.log('Deleting category:', category);
-    //     this.http.delete(`/api/Category/Delete/${category.id}`).subscribe({
-    //         next: () => {
-    //             console.log('Category deleted successfully');
-    //             // Remove the deleted category from the list
-    //             this.categories = this.categories.filter(c => c.id !== category.id);
-    //         },
-    //         error: (err) => {
-    //             console.error('Failed to delete category', err);
-    //         }
-    //     });
-    // }
-
+    deleteProduct(categoryId: number) {
+        console.log('Deleting category:', categoryId);  
+        this.http.delete(`/api/Category/Delete/${categoryId}`).subscribe({
+            next: () => {
+                alert('Category deleted successfully');
+                this.categories = this.loadProducts();
+            }
+        });
+    }
     addCategory(){
         this.router.navigate(['/categories']);
 

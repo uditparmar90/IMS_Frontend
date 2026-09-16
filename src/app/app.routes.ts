@@ -14,9 +14,9 @@ export const routes: Routes = [
     {path:'signUp',component:SignupComponent},
     {path:'Product',component:AddProductComponent},
     {path:'ProductList',component:ProductListComponent},
-    {path:'categories',component:AddCategory},
+    {path:'app-add-category/:id',component:AddCategory},
     {path:'category-list',component:CategoryList},
-    {path:'sub-categories',component:AddSubCategory},
+    {path:'sub-categories/:id',component:AddSubCategory},
     {path:'ProductMapBtn',component:ProductMapBtn},
     { path:'**', component: NotFound }
 

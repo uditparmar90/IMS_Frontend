@@ -24,6 +24,12 @@ export class AddCategory implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.http.get('/api/Category/GetCategory/15').subscribe({
+      next: (data) => {
+        console.log('Fetched category:', data);
+        this.categoryForm.patchValue(data);
+      }
+    });
     this.initForm();
   }
 
