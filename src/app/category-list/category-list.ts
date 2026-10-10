@@ -3,14 +3,12 @@ import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit, signal} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TableModule } from "primeng/table";
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-category-list',
     templateUrl: './category-list.html',
     styleUrl: './category-list.css',
-    imports: [TableModule, AsyncPipe],
+    imports: [TableModule],
 })
 export class CategoryList implements OnInit {
     protected http = inject(HttpClient); 
