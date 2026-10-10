@@ -24,13 +24,22 @@ export class AddCategory implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.http.get('/api/Category/GetCategory/15').subscribe({
+    this.initForm();
+    this.http.get<{ id: boolean | null; name: string | null; userId: string | null }>('/api/Category/GetCategory/15').subscribe({
       next: (data) => {
         console.log('Fetched category:', data);
-        this.categoryForm.patchValue(data);
+        // this.categoryForm.patchValue(data);
+        this.categoryForm.get('categoryName')?.setValue(data.name === null ? '' : data.name );
+        this.categoryForm.get('description')?.setValue('',{ onlySelf: true });
+      },
+      error: (err) => {
+        if (err.status === 401){
+          this.router.navigate(['/login']);
+        }
+        console.error('Failed to fetch category', err);
       }
     });
-    this.initForm();
+    
   }
 
   /**
@@ -86,6 +95,6 @@ export class AddCategory implements OnInit {
    */
   onCancel(): void {
     this.categoryForm.reset();
-    this.router.navigate(['/manageCategories']);
+    this.router.navigate(['/category-list']);
   }
 }

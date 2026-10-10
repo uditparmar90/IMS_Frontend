@@ -18,7 +18,7 @@
     <div class="card-body p-0">
 
       <p-table
-        [value]="(categories | async) || []" 
+        [value]="categories()" 
         [paginator]="true" 
         [rows]="10" 
         [rowsPerPageOptions]="[5, 10, 20]"
