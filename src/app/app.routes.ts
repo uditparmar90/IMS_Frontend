@@ -18,6 +18,6 @@ export const routes: Routes = [
     {path:'category-list',component:CategoryList},
     {path:'sub-categories/:id',component:AddSubCategory},
     {path:'ProductMapBtn',component:ProductMapBtn},
-    { path:'**', component: NotFound }
+    {path:'**', component: NotFound}
 
 ];  

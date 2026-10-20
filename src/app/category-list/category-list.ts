@@ -70,7 +70,7 @@ export class CategoryList implements OnInit {
         });
     }
     addCategory(){
-        this.router.navigate(['/categories']);
+        this.router.navigate(['/app-add-category',0]);
 
     }
 }

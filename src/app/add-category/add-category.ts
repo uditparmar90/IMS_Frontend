@@ -25,21 +25,25 @@ export class AddCategory implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.http.get<{ id: boolean | null; name: string | null; userId: string | null }>('/api/Category/GetCategory/15').subscribe({
+    this.http.get<{ id: boolean | null; name: string | null; userId: string | null }>('/api/Category/GetCategory').subscribe({
       next: (data) => {
         console.log('Fetched category:', data);
         // this.categoryForm.patchValue(data);
-        this.categoryForm.get('categoryName')?.setValue(data.name === null ? '' : data.name );
-        this.categoryForm.get('description')?.setValue('',{ onlySelf: true });
+
+        if (data) {
+          this.categoryForm.get('categoryName')?.setValue(data.name === null ? '' : data.name);
+          this.categoryForm.get('isActive')?.setValue(data.id === null ? true : data.id);
+        }
       },
+
       error: (err) => {
-        if (err.status === 401){
+        if (err.status === 401) {
           this.router.navigate(['/login']);
         }
         console.error('Failed to fetch category', err);
       }
     });
-    
+
   }
 
   /**
@@ -47,8 +51,8 @@ export class AddCategory implements OnInit {
    */
   private initForm(): void {
     this.categoryForm = this.fb.group({
+      Id:[0],
       categoryName: ['', [Validators.required, Validators.minLength(3)]],
-      description: [''], 
       isActive: [true] // Default to true (Active)
     });
   }
@@ -72,16 +76,18 @@ export class AddCategory implements OnInit {
       return;
     }
 
-    const formData = this.categoryForm.value;
-    this.isSubmitting = true;
-
+    const formData = {
+      // id: this.categoryForm.get('Id')?.value,
+      name: this.categoryForm.get('categoryName')?.value,
+      isActive: this.categoryForm.get('isActive')?.value
+    }
     console.log('Submitting Payload:', formData);
 
     this.http.post('/api/Category/Insert', formData).subscribe({
       next: () => {
         this.isSubmitting = false;
-        this.categoryForm.reset({ categoryName: '', description: '', isActive: true });
-        this.router.navigate(['/manageCategories']);
+        this.categoryForm.reset({ categoryName: '', isActive: true });
+        this.router.navigate(['/category-list']);
       },
       error: (err) => {
         this.isSubmitting = false;
