@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router'; // For navigation after save
+import { ActivatedRoute, Router } from '@angular/router'; // For navigation after save
 
 @Component({
   selector: 'app-add-category',
@@ -13,6 +13,7 @@ export class AddCategory implements OnInit {
 
   // The form group instance
   categoryForm!: FormGroup;
+  id: number = 0; // To hold the category ID for editing
 
   // State to handle button loading/disabling during API calls
   isSubmitting: boolean = false;
@@ -21,28 +22,33 @@ export class AddCategory implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private http: HttpClient,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.initForm();
-    this.http.get<{ id: boolean | null; name: string | null; userId: string | null }>('/api/Category/GetCategory').subscribe({
-      next: (data) => {
-        console.log('Fetched category:', data);
-        // this.categoryForm.patchValue(data);
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log('Category ID from route:', this.id);
+    if (this.id > 0) {
+      this.http.get<{ id: number | null; name: string | null; userId: string | null; isActive: boolean | null }>(`/api/Category/GetCategory/${this.id}`).subscribe({
+        next: (data) => {
+          console.log('Fetched category:', data);
 
-        if (data) {
-          this.categoryForm.get('categoryName')?.setValue(data.name === null ? '' : data.name);
-          this.categoryForm.get('isActive')?.setValue(data.id === null ? true : data.id);
+          if (data) {
+            this.categoryForm.get('Id')?.setValue(data.id === null ? 0 : data.id);
+            this.categoryForm.get('categoryName')?.setValue(data.name === null ? '' : data.name);
+            this.categoryForm.get('isActive')?.setValue(data.isActive === null ? true : data.isActive);
+          }
+        },
+        error: (err) => {
+          if (err.status === 401) {
+            this.router.navigate(['/login']);
+          }
+          console.error('Failed to fetch category', err);
         }
-      },
+      });
 
-      error: (err) => {
-        if (err.status === 401) {
-          this.router.navigate(['/login']);
-        }
-        console.error('Failed to fetch category', err);
-      }
-    });
+    }
 
   }
 
@@ -51,7 +57,7 @@ export class AddCategory implements OnInit {
    */
   private initForm(): void {
     this.categoryForm = this.fb.group({
-      Id:[0],
+      Id: [0],
       categoryName: ['', [Validators.required, Validators.minLength(3)]],
       isActive: [true] // Default to true (Active)
     });
@@ -77,7 +83,7 @@ export class AddCategory implements OnInit {
     }
 
     const formData = {
-      // id: this.categoryForm.get('Id')?.value,
+      id: this.categoryForm.get('Id')?.value,
       name: this.categoryForm.get('categoryName')?.value,
       isActive: this.categoryForm.get('isActive')?.value
     }

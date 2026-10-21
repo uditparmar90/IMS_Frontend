@@ -22,29 +22,20 @@ export class CategoryList implements OnInit {
         type category={
             id: number;
             name: string;
+            isActive: boolean;
         }
         this.loadProducts();
-        // this.route.queryParams.subscribe(params => {
-        //     const categoryId = params['categoryId'];
-        //     console.log('Query parameter categoryId:', categoryId);
-        // });
-        console.log('Fetching categories from API...');
-        
     }
 
-    // private loadProducts(): Observable<any[]> {
-    //     return this.http.get<any[]>('/api/Category/GetAllCategories').pipe(tap((data) => console.log('Data received:', data)));
-    // }
     private loadProducts(): void {
         this.http.get<any[]>('/api/Category/GetAllCategories').subscribe({ next: (data) => 
-            this.categories.set(data) });
+            this.categories.set(data) 
+        });
     }
 
 
     editProduct(categoryId: number) {
-        console.log('Editing category:', categoryId);
         this.router.navigate(['/app-add-category', categoryId]);
-        // Implementation for editing a category
     }
     deleteProduct(categoryId: number) {
         console.log('Deleting category:', categoryId);  
