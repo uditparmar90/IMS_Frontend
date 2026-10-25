@@ -13,6 +13,7 @@ export const routes: Routes = [
     {path:'',component:LoginComponent,pathMatch: 'full'},
     {path:'signUp',component:SignupComponent},
     {path:'Product',component:AddProductComponent},
+    {path:'Product/:id',component:AddProductComponent},
     {path:'ProductList',component:ProductListComponent},
     {path:'app-add-category/:id',component:AddCategory},
     {path:'category-list',component:CategoryList},

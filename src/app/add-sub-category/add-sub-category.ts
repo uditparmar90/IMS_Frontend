@@ -31,7 +31,7 @@ export class AddSubCategory implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get<any[]>('/api/Category/GetCategory').subscribe({
+    this.http.get<any[]>('/api/Category/GetAllCategories').subscribe({
       next: (categories) => {
         this.parentCategories = categories || [];
       },

@@ -10,9 +10,13 @@
       </button>
     </div>
 
+    @if (errorMessage) {
+      <div class="alert alert-danger m-3 mb-0" role="alert">{{ errorMessage }}</div>
+    }
+
     <div class="card-body p-0">
         <p-table 
-        [value]="(products | async) || []" 
+        [value]="products()" 
         [paginator]="true" 
         [rows]="10" 
         [rowsPerPageOptions]="[5, 10, 20]"

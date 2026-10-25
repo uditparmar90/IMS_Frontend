@@ -56,3 +56,11 @@
   border: 1px solid rgb(130, 130, 187);
   box-shadow: none;
 }
+
+.product-preview {
+  max-width: 100%;
+  max-height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}

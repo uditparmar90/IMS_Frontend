@@ -42,13 +42,13 @@ export class ProductMapBtn implements OnInit {
                 this.productCategoryIds.set(uniqueCategoryIds);
 
                 // 3. Fetch Categories
-                this.httpClient.get<any[]>('/api/Category/GetCategory').subscribe((categories) => {
+                this.httpClient.get<any[]>('/api/Category/GetAllCategories').subscribe((categories) => {
                     // Optional: Filter category list to only include categories present in your products
                     if(categories && categories.length > 0) {
-                        const categoryIds: number[] = categories.filter((cat) =>
-                        uniqueCategoryIds.includes(cat.id),
-                    );
-                    this.productCategoryList.set(categoryIds);
+                        const matchedCategories = categories.filter((cat) =>
+                            uniqueCategoryIds.includes(cat.id),
+                        );
+                        this.productCategoryList.set(matchedCategories);
                     console.log('Categories fetched:', categories);
                     console.log('productCategoryList updated:', this.productCategoryList());
                     console.log('productCategoryIds updated:', this.productCategoryIds());

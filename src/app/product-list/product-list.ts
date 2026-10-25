@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { TableModule } from 'primeng/table';
-import { tap } from 'rxjs/operators'; // 1. Import 'tap'
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -16,15 +14,28 @@ export class ProductListComponent {
   private httpClient = inject(HttpClient);
   private router = inject(Router);
 
-  products: Observable<any[]> = this.loadProducts();
+  products = signal<any[]>([]);
+  errorMessage = '';
 
-  private loadProducts(): Observable<any[]> {
-    return this.httpClient.get<any[]>('/api/Product/GetAllProducts').pipe(tap((data) => console.log('Data received:', data)));
+  constructor() {
+    this.loadProducts();
+  }
+
+  private loadProducts(): void {
+    this.httpClient.get<any[]>('/api/Product/GetAllProducts').subscribe({
+      next: (data) => {
+        this.products.set(data ?? []);
+        this.errorMessage = '';
+      },
+      error: (err) => {
+        console.error('Failed to load products', err);
+        this.errorMessage = 'Failed to load products.';
+      },
+    });
   }
 
   editProduct(product: any) {
-    this.router.navigate(['/Product'], { state: { product: product } });
-    console.log('Editing product:', product);
+    this.router.navigate(['/Product', product.id]);
   }
 
   deleteProduct(product: any) {
@@ -33,10 +44,18 @@ export class ProductListComponent {
     }
     this.httpClient.delete(`/api/Product/Delete/${product.id}`).subscribe({
       next: () => {
-        this.products = this.loadProducts();
+        this.errorMessage = '';
+        this.loadProducts();
       },
       error: (err) => {
         console.error('Failed to delete product', err);
+        if (err.status === 409) {
+          this.errorMessage = err.error?.message ?? 'This product is in use and cannot be deleted.';
+        } else if (err.status === 404) {
+          this.errorMessage = 'Product not found.';
+        } else {
+          this.errorMessage = 'Failed to delete product.';
+        }
       },
     });
   }
